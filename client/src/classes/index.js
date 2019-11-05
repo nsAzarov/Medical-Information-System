@@ -1,7 +1,8 @@
 class Clinic {
-    constructor(clinicName, doctorsList) {
+    constructor(clinicName, doctorsList, wardsNumber) {
         this.clinicName = clinicName;
         this.doctorsList = doctorsList;
+        this.wardsNumber = wardsNumber;
     }
 }
 class HospitalWard extends Clinic {

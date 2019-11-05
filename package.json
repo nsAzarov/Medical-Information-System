@@ -1,7 +1,7 @@
 {
-  "name": "estore",
+  "name": "medical-information-system",
   "version": "1.0.0",
-  "description": "",
+  "description": "Medical-Information-System",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nsAzarov/eStore.git"
+    "url": "git+https://github.com/nsAzarov/Medical-Information-System.git"
   },
   "author": "nsAzarov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nsAzarov/eStore/issues"
+    "url": "https://github.com/nsAzarov/Medical-Information-System/issues"
   },
-  "homepage": "https://github.com/nsAzarov/eStore#readme",
+  "homepage": "https://github.com/nsAzarov/Medical-Information-System#readme",
   "dependencies": {
     "concurrently": "^5.0.0",
     "cors": "^2.8.5",
