@@ -1,9 +1,11 @@
 class Clinic {
-    constructor(clinicName, doctorsList, wardsNumber) {
+    constructor(idClinic, imgUrl, clinicName) {
+        this.idClinic = idClinic;
+        this.imgUrl = imgUrl;
         this.clinicName = clinicName;
-        this.doctorsList = doctorsList;
-        this.wardsNumber = wardsNumber;
     }
+    doctorsList = [];
+    wardsNumber = 0;
 }
 class HospitalWard extends Clinic {
     constructor(idWard, capacity, occupancy, patientList) {

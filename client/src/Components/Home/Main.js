@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Container } from '../Master/Container'
+import {Container} from '../Master/Container'
 
 const ChoiceTitle = styled.div``;
 
