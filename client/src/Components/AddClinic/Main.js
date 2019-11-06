@@ -1,5 +1,5 @@
-import React, {Fragment, useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState} from 'react';
+import {Redirect} from 'react-router';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 
@@ -42,63 +42,6 @@ const ClinicName = styled.form`
     }
 `;
 
-const ClinicInfoSection = styled.section`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const Info = styled.div`
-
-`;
-
-const DoctorsSection = styled.section`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    h3 {
-        display: inline-block;
-        margin: 20px;
-    }
-`;
-
-const ChoosingArea = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const ChooseDoctors = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    h4 {
-        display: inline-block;
-    }
-`;
-
-const DoctorsList = styled.div`
-    height: 200px;
-    width: 400px;
-    border: 1px solid grey;
-    border-radius: 3px;
-    margin: 0px 20px;
-`;
-
-const NewDoctor = styled(Link)`
-
-`;
-
-const DoctorLine = styled.li`
-`;
-
-const WardsSection = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
 // Добавление логотипа
 // добавление называния
 // 
@@ -109,23 +52,25 @@ const WardsSection = styled.div`
 // отдельных пациентов при желании. 
 //
 export default function Main() {
-    const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [objectCreatedSuccessfully, setObjectCreatedSuccessfully] = useState(false);
-    const [clinicObject, setClinicObject] = useState({});
+    const [idClinic, setIdClinic] = useState();
     const imgUrl = useFormInput('');
     const name = useFormInput('');
     const createNewClinicObject = (e) => {
         e.preventDefault();
-        const newObj = new Clinic(uniqid(), imgUrl.value, name.value);
-        setClinicObject(newObj);
+
+        const id = uniqid();
+        setIdClinic(id);
+        const newObj = new Clinic(id, imgUrl.value, name.value);
+
         let clinics = JSON.parse(localStorage.getItem('clinics'));
         clinics.push(newObj);
         localStorage.setItem('clinics', JSON.stringify(clinics));
+
         setObjectCreatedSuccessfully(true);
     }
     return (
         <Container>
-            {!objectCreatedSuccessfully ?
             <AddNewClinic>
                 <Logo src={imgUrl.value ? imgUrl.value : 'https://izpk.ru/files/mark/nophoto600.jpg'}/>
                 <ClinicName>
@@ -134,42 +79,13 @@ export default function Main() {
                     <button onClick={(e) => createNewClinicObject(e)}>Создать</button>
                 </ClinicName>
             </AddNewClinic>
+            {objectCreatedSuccessfully ? 
+            <Redirect to={{
+                pathname: `/Clinic/${idClinic}`,
+                state: idClinic
+            }}/>
             :
-            <Fragment>
-                <ClinicInfoSection>
-                    <Logo src={imgUrl.value ? imgUrl.value : 'https://izpk.ru/files/mark/nophoto600.jpg'}/>
-                    <Info>
-                        <h1>{name.value}</h1>
-                        <h4>Количество врачей: {clinicObject.doctorsList.length}</h4>
-                        <h4>Количество палат: {clinicObject.wardsNumber}</h4>
-                    </Info>
-                </ClinicInfoSection>
-                <hr />
-                <DoctorsSection>
-                    <h3>Добавьте врачей</h3>
-                    <ChoosingArea>
-                        <ChooseDoctors>
-                            <h4>Все врачи в базе данных</h4>
-                            <DoctorsList>
-                                <NewDoctor to='/AddNewDoctor'>Новый врач +</NewDoctor>
-                                {doctorsInDB.map((element, i) => {
-                                    return <DoctorLine item={element} key={i}>{element.idDoctor}</DoctorLine>
-                                })}
-                            </DoctorsList>
-                        </ChooseDoctors>
-                        <ChooseDoctors>
-                            <h4>Работающие в клинике</h4>
-                            <DoctorsList>
-                            </DoctorsList>
-                        </ChooseDoctors>
-                    </ChoosingArea>
-                </DoctorsSection>
-                <hr />
-                <WardsSection>
-
-                </WardsSection>
-            </Fragment>
-            }
+            null}
         </Container>
     )
 }
