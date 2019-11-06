@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 
@@ -41,7 +42,7 @@ const ClinicName = styled.form`
     }
 `;
 
-const ClinicInfo = styled.div`
+const ClinicInfoSection = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,6 +50,53 @@ const ClinicInfo = styled.div`
 
 const Info = styled.div`
 
+`;
+
+const DoctorsSection = styled.section`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h3 {
+        display: inline-block;
+        margin: 20px;
+    }
+`;
+
+const ChoosingArea = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const ChooseDoctors = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h4 {
+        display: inline-block;
+    }
+`;
+
+const DoctorsList = styled.div`
+    height: 200px;
+    width: 400px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 0px 20px;
+`;
+
+const NewDoctor = styled(Link)`
+
+`;
+
+const DoctorLine = styled.li`
+`;
+
+const WardsSection = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 // Добавление логотипа
@@ -61,6 +109,7 @@ const Info = styled.div`
 // отдельных пациентов при желании. 
 //
 export default function Main() {
+    const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [objectCreatedSuccessfully, setObjectCreatedSuccessfully] = useState(false);
     const [clinicObject, setClinicObject] = useState({});
     const imgUrl = useFormInput('');
@@ -87,15 +136,38 @@ export default function Main() {
             </AddNewClinic>
             :
             <Fragment>
-                <ClinicInfo>
+                <ClinicInfoSection>
                     <Logo src={imgUrl.value ? imgUrl.value : 'https://izpk.ru/files/mark/nophoto600.jpg'}/>
                     <Info>
                         <h1>{name.value}</h1>
                         <h4>Количество врачей: {clinicObject.doctorsList.length}</h4>
                         <h4>Количество палат: {clinicObject.wardsNumber}</h4>
                     </Info>
-                </ClinicInfo>
+                </ClinicInfoSection>
                 <hr />
+                <DoctorsSection>
+                    <h3>Добавьте врачей</h3>
+                    <ChoosingArea>
+                        <ChooseDoctors>
+                            <h4>Все врачи в базе данных</h4>
+                            <DoctorsList>
+                                <NewDoctor to='/AddNewDoctor'>Новый врач +</NewDoctor>
+                                {doctorsInDB.map((element, i) => {
+                                    return <DoctorLine item={element} key={i}>{element.idDoctor}</DoctorLine>
+                                })}
+                            </DoctorsList>
+                        </ChooseDoctors>
+                        <ChooseDoctors>
+                            <h4>Работающие в клинике</h4>
+                            <DoctorsList>
+                            </DoctorsList>
+                        </ChooseDoctors>
+                    </ChoosingArea>
+                </DoctorsSection>
+                <hr />
+                <WardsSection>
+
+                </WardsSection>
             </Fragment>
             }
         </Container>

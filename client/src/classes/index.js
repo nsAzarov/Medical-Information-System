@@ -30,8 +30,8 @@ class Visit {
 }
 
 class Doctor {
-    constructor(id, name, age, specialization, experience, schedule) {
-        this.id = id;
+    constructor(idDoctor, name, age, specialization, experience, schedule) {
+        this.idDoctor = idDoctor;
         this.name = name;
         this.age = age;
         this.specialization = specialization;
