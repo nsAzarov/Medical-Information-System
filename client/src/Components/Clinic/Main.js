@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {Container} from '../Master/Container';
-import {useFormInput} from '../Master/functions';
 import { Clinic } from '../../classes';
 
 const Logo = styled.img`
@@ -83,22 +82,20 @@ const WardsSection = styled.div`
 //
 export default function Main(props) {
     const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
-    const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
-    const [clinicsInDB, setClinicsInDB] = useState(JSON.parse(localStorage.getItem('clinics')));
+    const [doctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const AddToDoctorsList = (doctorObj) => {
         let objectIsAlreadyInList = false;
         for (let i = 0; i < clinicObj.doctorsList.length; i++) {
             if(clinicObj.doctorsList[i].idDoctor === doctorObj.idDoctor) objectIsAlreadyInList = true;
         }
         if (!objectIsAlreadyInList) {
-            let tempObj = new Clinic({...clinicObj});
-            //tempObj.doctorsList.push(doctorObj);
+            let tempObj = new Clinic(clinicObj.idClinic, clinicObj.imgUrl, clinicObj.clinicName);
             tempObj.addNewDoctorToList(doctorObj);
             setClinicObj(tempObj);
         }
     }
     const RemoveFromDoctorsList = (doctorObj) => {
-        let tempObj = new Clinic({...clinicObj});
+        let tempObj = new Clinic(clinicObj.idClinic, clinicObj.imgUrl, clinicObj.clinicName);
         let tempDoctorsList = [];
         for(let i = 0; i < tempObj.doctorsList.length; i++) {
             if (tempObj.doctorsList[i].idDoctor !== doctorObj.idDoctor) {

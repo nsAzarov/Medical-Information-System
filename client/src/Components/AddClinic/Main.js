@@ -53,7 +53,6 @@ const ClinicName = styled.form`
 //
 export default function Main() {
     const [objectCreatedSuccessfully, setObjectCreatedSuccessfully] = useState(false);
-    const [idClinic, setIdClinic] = useState();
     const [newObj, setNewObj] = useState({});
     const [newObjStringified, setNewObjStringified] = useState('');
     const imgUrl = useFormInput('');
