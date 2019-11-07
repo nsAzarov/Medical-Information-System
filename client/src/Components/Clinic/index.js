@@ -4,11 +4,11 @@ import Header from '../Master/Header';
 import Main  from './Main';
 import Footer from '../Master/Footer';
 
-export default function AddNewClinic(props) {
+export default function Clinic(props) {
     return (
         <Fragment>
             <Header />
-            <Main idClinic={props.match.params.id}/>
+            <Main clinicObj={props.location.state.newObj}/>
             <Footer />
         </Fragment>
     )

@@ -53,6 +53,7 @@ const DoctorsList = styled.div`
     border: 1px solid grey;
     border-radius: 3px;
     margin: 0px 20px;
+    overflow: auto;
 `;
 
 const NewDoctor = styled(Link)`
@@ -60,6 +61,7 @@ const NewDoctor = styled(Link)`
 `;
 
 const DoctorLine = styled.li`
+    list-style-type: none;
 `;
 
 const WardsSection = styled.div`
@@ -78,25 +80,50 @@ const WardsSection = styled.div`
 // отдельных пациентов при желании. 
 //
 export default function Main(props) {
-    const {idClinic} = props;
+    //const {clinicObj} = props;
+    const [clinicObj, setClinicObj] = useState(props.clinicObj);
     const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [clinicsInDB, setClinicsInDB] = useState(JSON.parse(localStorage.getItem('clinics')));
-    let clinicObj;
+    /*let clinicObj;
     for (let i = clinicsInDB.length - 1; i > 0; i--) {
         if(clinicsInDB[i].idClinic == idClinic) {
             clinicObj = clinicsInDB[i];
             break;
         }
+    }*/
+    const AddToDoctorsList = (doctorObj) => {
+        let tempObj = {...clinicObj};
+        tempObj.doctorsList.push(doctorObj);
+        setClinicObj(tempObj);
+        /*for (let i = 0; i < clinicsInDB.length; i++) {
+            if(clinicsInDB[i].idClinic === clinicObj.idClinic) {
+                clinicsInDB[i] = clinicObj;
+                break;
+            }
+        }
+        localStorage.setItem('clinics', JSON.stringify(clinicsInDB));*/
+        //А НАДО ЛИ МНЕ В ЭТОЙ ФУНКЦИИ МЕНЯТЬ LOCALSTORAGE?
+        //МОЖЕТ ПОМЕНЯТЬ ЕГО ТОЛЬКО ПОСЛЕ НАЖАТИЯ НА КНОПКУ "СОХРАНИТЬ"?
     }
-    console.log(clinicObj);
+    const RemoveFromDoctorsList = (doctorObj) => {
+        let tempObj = {...clinicObj};
+        let tempDoctorsList = [];
+        for(let i = 0; i < tempObj.doctorsList.length; i++) {
+            if (tempObj.doctorsList[i].idDoctor !== doctorObj.idDoctor) {
+                tempDoctorsList.push(tempObj.doctorsList[i]);
+            }
+        }
+        tempObj.doctorsList = tempDoctorsList;
+        setClinicObj(tempObj);
+    }
     return (
         <Container>
             <ClinicInfoSection>
-                <Logo src={'https://izpk.ru/files/mark/nophoto600.jpg'}/>
+                <Logo src={clinicObj.imgUrl ? clinicObj.imgUrl : 'https://izpk.ru/files/mark/nophoto600.jpg'}/>
                 <Info>
-                    <h1>name.value</h1>
-                    <h4>Количество врачей: </h4>
-                    <h4>Количество палат: </h4>
+                    <h1>{clinicObj.clinicName}</h1>
+                    <h4>Количество врачей: {clinicObj.doctorsList.length}</h4>
+                    <h4>Количество палат: {clinicObj.wardsNumber}</h4>
                 </Info>
             </ClinicInfoSection>
             <hr />
@@ -108,13 +135,16 @@ export default function Main(props) {
                         <DoctorsList>
                             <NewDoctor to='/AddNewDoctor'>Новый врач +</NewDoctor>
                             {doctorsInDB.map((element, i) => {
-                                return <DoctorLine item={element} key={i}>{element.idDoctor}</DoctorLine>
+                                return <DoctorLine key={i} onClick={() => {AddToDoctorsList(element)}}>{element.idDoctor}</DoctorLine>
                             })}
                         </DoctorsList>
                     </ChooseDoctors>
                     <ChooseDoctors>
                         <h4>Работающие в клинике</h4>
                         <DoctorsList>
+                            {clinicObj.doctorsList.map((element, i) => {
+                                return <DoctorLine key={i} onClick={() => {RemoveFromDoctorsList(element)}}>{element.idDoctor}</DoctorLine>
+                            })}
                         </DoctorsList>
                     </ChooseDoctors>
                 </ChoosingArea>

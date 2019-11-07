@@ -54,14 +54,15 @@ const ClinicName = styled.form`
 export default function Main() {
     const [objectCreatedSuccessfully, setObjectCreatedSuccessfully] = useState(false);
     const [idClinic, setIdClinic] = useState();
+    const [newObj, setNewObj] = useState({});
     const imgUrl = useFormInput('');
     const name = useFormInput('');
     const createNewClinicObject = (e) => {
         e.preventDefault();
 
         const id = uniqid();
-        setIdClinic(id);
         const newObj = new Clinic(id, imgUrl.value, name.value);
+        setNewObj(newObj);
 
         let clinics = JSON.parse(localStorage.getItem('clinics'));
         clinics.push(newObj);
@@ -81,8 +82,8 @@ export default function Main() {
             </AddNewClinic>
             {objectCreatedSuccessfully ? 
             <Redirect to={{
-                pathname: `/Clinic/${idClinic}`,
-                state: idClinic
+                pathname: `/Clinic/${newObj.idClinic}`,
+                state: {newObj}
             }}/>
             :
             null}
