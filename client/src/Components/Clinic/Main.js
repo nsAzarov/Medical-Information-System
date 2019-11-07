@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import {Container} from '../Master/Container';
 import {useFormInput} from '../Master/functions';
+import { Clinic } from '../../classes';
 
 const Logo = styled.img`
     height: 120px;
@@ -22,14 +23,15 @@ const Info = styled.div`
 `;
 
 const DoctorsSection = styled.section`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     h3 {
         display: inline-block;
         margin: 20px;
     }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 50px;
 `;
 
 const ChoosingArea = styled.div`
@@ -80,30 +82,19 @@ const WardsSection = styled.div`
 // отдельных пациентов при желании. 
 //
 export default function Main(props) {
-    //const {clinicObj} = props;
     const [clinicObj, setClinicObj] = useState(props.clinicObj);
     const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [clinicsInDB, setClinicsInDB] = useState(JSON.parse(localStorage.getItem('clinics')));
-    /*let clinicObj;
-    for (let i = clinicsInDB.length - 1; i > 0; i--) {
-        if(clinicsInDB[i].idClinic == idClinic) {
-            clinicObj = clinicsInDB[i];
-            break;
-        }
-    }*/
     const AddToDoctorsList = (doctorObj) => {
-        let tempObj = {...clinicObj};
-        tempObj.doctorsList.push(doctorObj);
-        setClinicObj(tempObj);
-        /*for (let i = 0; i < clinicsInDB.length; i++) {
-            if(clinicsInDB[i].idClinic === clinicObj.idClinic) {
-                clinicsInDB[i] = clinicObj;
-                break;
-            }
+        let objectIsAlreadyInList = false;
+        for (let i = 0; i < clinicObj.doctorsList.length; i++) {
+            if(clinicObj.doctorsList[i].idDoctor === doctorObj.idDoctor) objectIsAlreadyInList = true;
         }
-        localStorage.setItem('clinics', JSON.stringify(clinicsInDB));*/
-        //А НАДО ЛИ МНЕ В ЭТОЙ ФУНКЦИИ МЕНЯТЬ LOCALSTORAGE?
-        //МОЖЕТ ПОМЕНЯТЬ ЕГО ТОЛЬКО ПОСЛЕ НАЖАТИЯ НА КНОПКУ "СОХРАНИТЬ"?
+        if (!objectIsAlreadyInList) {
+            let tempObj = new Clinic({...clinicObj});
+            tempObj.addNewDoctorToList(doctorObj);
+            setClinicObj(tempObj);
+        }
     }
     const RemoveFromDoctorsList = (doctorObj) => {
         let tempObj = {...clinicObj};

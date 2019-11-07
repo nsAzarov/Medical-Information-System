@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const HeaderSection = styled.header`
     height: 100px;
     width: 100%;
-    border: 1px solid black;
+    background: whitesmoke;
 `;
 
 export default function Header() {

@@ -6,6 +6,9 @@ class Clinic {
     }
     doctorsList = [];
     wardsNumber = 0;
+    addNewDoctorToList = (doctorObj) => {
+        this.doctorsList.push(doctorObj);
+    }
 }
 class HospitalWard extends Clinic {
     constructor(idWard, capacity, occupancy, patientList) {
