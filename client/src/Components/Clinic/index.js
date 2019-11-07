@@ -8,7 +8,7 @@ export default function Clinic(props) {
     return (
         <Fragment>
             <Header />
-            <Main clinicObj={props.location.state.newObj}/>
+            <Main clinicObj={props.location.state.newObjStringified}/>
             <Footer />
         </Fragment>
     )

@@ -55,6 +55,7 @@ export default function Main() {
     const [objectCreatedSuccessfully, setObjectCreatedSuccessfully] = useState(false);
     const [idClinic, setIdClinic] = useState();
     const [newObj, setNewObj] = useState({});
+    const [newObjStringified, setNewObjStringified] = useState('');
     const imgUrl = useFormInput('');
     const name = useFormInput('');
     const createNewClinicObject = (e) => {
@@ -67,7 +68,8 @@ export default function Main() {
         let clinics = JSON.parse(localStorage.getItem('clinics'));
         clinics.push(newObj);
         localStorage.setItem('clinics', JSON.stringify(clinics));
-
+        
+        setNewObjStringified(JSON.stringify(newObj));
         setObjectCreatedSuccessfully(true);
     }
     return (
@@ -83,7 +85,7 @@ export default function Main() {
             {objectCreatedSuccessfully ? 
             <Redirect to={{
                 pathname: `/Clinic/${newObj.idClinic}`,
-                state: {newObj}
+                state: {newObjStringified}
             }}/>
             :
             null}

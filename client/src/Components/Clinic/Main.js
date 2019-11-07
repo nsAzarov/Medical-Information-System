@@ -82,7 +82,7 @@ const WardsSection = styled.div`
 // отдельных пациентов при желании. 
 //
 export default function Main(props) {
-    const [clinicObj, setClinicObj] = useState(props.clinicObj);
+    const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
     const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [clinicsInDB, setClinicsInDB] = useState(JSON.parse(localStorage.getItem('clinics')));
     const AddToDoctorsList = (doctorObj) => {
@@ -92,12 +92,13 @@ export default function Main(props) {
         }
         if (!objectIsAlreadyInList) {
             let tempObj = new Clinic({...clinicObj});
+            //tempObj.doctorsList.push(doctorObj);
             tempObj.addNewDoctorToList(doctorObj);
             setClinicObj(tempObj);
         }
     }
     const RemoveFromDoctorsList = (doctorObj) => {
-        let tempObj = {...clinicObj};
+        let tempObj = new Clinic({...clinicObj});
         let tempDoctorsList = [];
         for(let i = 0; i < tempObj.doctorsList.length; i++) {
             if (tempObj.doctorsList[i].idDoctor !== doctorObj.idDoctor) {
