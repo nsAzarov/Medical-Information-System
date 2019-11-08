@@ -5,15 +5,15 @@ class Clinic {
         this.clinicName = clinicName;
     }
     doctorsList = [];
-    wardsNumber = 0;
+    hospitalRoomsList = [];
     addNewDoctorToList = (doctorObj) => {
         this.doctorsList.push(doctorObj);
     }
 }
-class HospitalWard extends Clinic {
-    constructor(idWard, capacity, occupancy, patientList) {
-        super();
-        this.idWard = idWard;
+class HospitalRoom {
+    constructor(idRoom, roomNumber, capacity, occupancy, patientList) {
+        this.idRoom = idRoom;
+        this.roomNumber = roomNumber;
         this.capacity = capacity; //вместимость
         this.occupancy = occupancy; //заполненность
         this.patientList = patientList; //[] id
@@ -55,7 +55,7 @@ class Patient {
 
 export {
     Clinic,
-    HospitalWard,
+    HospitalRoom,
     Visit,
     Doctor,
     Patient
