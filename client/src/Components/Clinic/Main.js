@@ -78,25 +78,74 @@ const RoomsSection = styled.div`
 `;
 
 const HospitalRooms = styled.div`
-    width: 840px;
+    width: 960px;
     display: flex;
     flex-wrap: wrap;
 `;
 
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    bottom: 0;
+    height: 100px;
+    width: 220px;
+    background: beige;
+    transition: .3s;
+    visibility: hidden;
+    transition: .3s ease-out;
+    opacity: .4;
+    label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        visibility: hidden;
+        input {
+            text-align: center;
+            width: 140px;
+        }
+        input[type='number'] {
+            padding-left: 15px;
+            width: 125px;
+        }
+    }
+    button {
+        visibility: hidden;
+        border: 1px solid grey;
+        border-radius: 3px;
+        width: 80px;
+        margin-top: 0;
+    }
+`;
+
 const HospitalRoomBlock = styled.div`
-    height: 90px;
-    width: 190px;
+    &:hover ${Form} {
+        background: #fae7b5;
+        height: 110px;
+        visibility: visible;
+        transition: .3s ease-out;
+        opacity: 1;
+        label {
+            visibility: visible;
+        }
+        button {
+            visibility: visible;
+            margin-top: 5px;
+        }
+    }
+    height: 100px;
+    width: 220px;
     background: beige;
     margin: 0px 10px 20px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     ul {
         list-style:none;
-        li {
-
-        }
     }
     &:last-child {
         display: flex;
@@ -126,10 +175,11 @@ const HospitalRoomBlock = styled.div`
         }
     }
 `;
-
+// сделать открытие формы по hover а не по клику!!!!!!!!!
 export default function Main(props) {
     const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
     const [doctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
+    const [formOpened, setFormOpened] = useState(false);
 
     const AddToDoctorsList = (doctorObj) => {
         let objectIsAlreadyInList = false;
@@ -210,10 +260,15 @@ export default function Main(props) {
                     {clinicObj.hospitalRoomsList.map((element, i) => {
                         return <HospitalRoomBlock key={i}>
                                 <ul>
-                                    <li>№{element.roomNumber || '-'}</li>
+                                    <li>№{element.roomNumber || ' -'}</li>
                                     <li>Вместимость: {element.capacity || '-'}</li>
                                     <li>Заполненность: {element.occupancy || '-'}</li>
                                 </ul>
+                                <Form>
+                                    <label>Номер палаты: <input value={element.roomNumber}></input></label>
+                                    <label>Вместимость: <input value={element.capacity} type='number' min={element.capacity}></input></label>
+                                    <button>Обновить</button>
+                                </Form>
                             </HospitalRoomBlock>
                     })}
                     <HospitalRoomBlock onClick={() => addNewHospitalRoomObject()}>
