@@ -78,35 +78,55 @@ const RoomsSection = styled.div`
 `;
 
 const HospitalRooms = styled.div`
-    height: 300px;
     width: 840px;
-    border: 1px solid black;
-`;
-
-const NewHospitalRoom = styled.div`
-    height: 90px;
-    width: 200px;
-    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
 `;
 
 const HospitalRoomBlock = styled.div`
     height: 90px;
-    width: 200px;
-    border: 1px solid blue;
+    width: 190px;
+    background: beige;
+    margin: 0px 10px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    ul {
+        list-style:none;
+        li {
+
+        }
+    }
+    &:last-child {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        h4 {
+            margin-bottom: 10px;
+            transition: .3s;
+        }
+        .plus-img {
+            height: 40px;
+            width: 40px;
+            fill: #ff5e5e;
+            transition: .3s;
+        }
+        &:hover {
+            h4 {
+                margin-bottom: 5px;
+            }
+            .plus-img {
+                height: 45px;
+                width: 45px;
+                fill: red;
+            }
+        }
+    }
 `;
 
-// Добавление логотипа
-// добавление называния
-// 
-// заполнение врачами. два варианта. или выбрать из списка существующих, либо перенаправить на страницу создания нового врача.
-// заполнение информации о палатах. Указать количество палат. На основании числа, появляется соответствующее количество палат
-// в виде прямоугольников. Нажимая на каждый из них, выпадает модальное окно (или лучше увеличивается этот прямоугольник до размера почти всего экрана)
-// В нём заполняем инфу: номер палаты, вместимость. Также здесь можно будет посмотреть список пациентов лежащих в этой палате и удалить 
-// отдельных пациентов при желании. 
-//
-// сделать такую же логику с палатами, как и с врачами
-// в списке отображать заполненные палаты, а также иметь блок добавляющий объект с новой палатой, заполненной нулевыми значениями. 
-// заполненные палаты можно корректировать по нажатию на блок с ней
 export default function Main(props) {
     const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
     const [doctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
@@ -188,9 +208,18 @@ export default function Main(props) {
                 <h3>Палаты в клинике</h3>
                 <HospitalRooms>
                     {clinicObj.hospitalRoomsList.map((element, i) => {
-                        return <HospitalRoomBlock key={i}></HospitalRoomBlock>
+                        return <HospitalRoomBlock key={i}>
+                                <ul>
+                                    <li>№{element.roomNumber || '-'}</li>
+                                    <li>Вместимость: {element.capacity || '-'}</li>
+                                    <li>Заполненность: {element.occupancy || '-'}</li>
+                                </ul>
+                            </HospitalRoomBlock>
                     })}
-                    <NewHospitalRoom onClick={() => addNewHospitalRoomObject()}>NEW</NewHospitalRoom>
+                    <HospitalRoomBlock onClick={() => addNewHospitalRoomObject()}>
+                        <h4>Добавить палату</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" className='plus-img' width="24" height="24" viewBox="0 0 24 24" ><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
+                    </HospitalRoomBlock>
                 </HospitalRooms>
             </RoomsSection>
         </Container>
