@@ -114,7 +114,7 @@ export default function Main(props) {
                 <Info>
                     <h1>{clinicObj.clinicName}</h1>
                     <h4>Количество врачей: {clinicObj.doctorsList.length}</h4>
-                    <h4>Количество палат: {clinicObj.roomsNumber}</h4>
+                    <h4>Количество палат: {clinicObj.hospitalRoomsList.length}</h4>
                 </Info>
             </ClinicInfoSection>
             <hr />
@@ -141,7 +141,7 @@ export default function Main(props) {
                 </ChoosingArea>
             </DoctorsSection>
             <hr />
-            <RoomsSection clinicState={[clinicObj, setClinicObj]}/>
+            <RoomsSection clinicState={[clinicObj, setClinicObj]} clinicObj={clinicObj}/>
         </Container>
     )
 }
