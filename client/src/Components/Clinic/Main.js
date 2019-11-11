@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import uniqid from 'uniqid';
 
 import {Container} from '../Master/Container';
 import RoomsSection from './RoomsSection';
-import {Clinic, HospitalRoom} from '../../classes';
-import {useFormInput} from '../Master/functions';
+import {Clinic} from '../../classes';
 
 const Logo = styled.img`
     height: 120px;
@@ -67,11 +65,17 @@ const NewDoctor = styled(Link)`
 const DoctorLine = styled.li`
     list-style-type: none;
 `;
-// сделать открытие формы по hover а не по клику!!!!!!!!!
+
+const SaveChangesButton = styled.button`
+    padding: 8px 14px;
+    margin: 20px auto;
+    border: 1px solid blue;
+    border-radius: 3px;
+`;
+
 export default function Main(props) {
     const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
     const [doctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
-    const [formOpened, setFormOpened] = useState(false);
 
     const AddToDoctorsList = (doctorObj) => {
         let objectIsAlreadyInList = false;
@@ -105,7 +109,23 @@ export default function Main(props) {
         setClinicObj(tempObj);
     }
 
-    
+    const SaveChanges = () => {
+        let clinics = JSON.parse(localStorage.getItem('clinics'));
+        console.log(clinics);
+        let tempArr = [];
+        for (let i = 0; i < clinics.length; i++) {
+            if (clinics[i].idClinic !== clinicObj.idClinic) {
+                tempArr.push(clinics[i]);
+                console.log('!=', clinics.idClinic, clinicObj.idClinic, tempArr);
+            } else {
+                tempArr.push(clinicObj);
+                console.log('=', tempArr);
+            }
+        }
+        clinics = tempArr;
+        console.log(clinics);
+        localStorage.setItem('clinics', JSON.stringify(tempArr));
+    }
 
     return (
         <Container>
@@ -142,6 +162,8 @@ export default function Main(props) {
             </DoctorsSection>
             <hr />
             <RoomsSection clinicState={[clinicObj, setClinicObj]} clinicObj={clinicObj}/>
+            <hr />
+            <SaveChangesButton onClick={() => SaveChanges()}>Сохранить изменения</SaveChangesButton>
         </Container>
     )
 }

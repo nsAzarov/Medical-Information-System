@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {useFormInput} from '../Master/functions';
-import {Clinic, HospitalRoom} from '../../classes';
+import {Clinic} from '../../classes';
 
 const Form = styled.form`
     display: flex;
@@ -13,6 +13,7 @@ const Form = styled.form`
     bottom: 0;
     height: 100px;
     width: 220px;
+    border-radius: 8px;
     background: beige;
     transition: .3s;
     visibility: hidden;
@@ -58,6 +59,7 @@ const HospitalRoomBlock = styled.div`
     height: 100px;
     width: 220px;
     background: beige;
+    border-radius: 8px;
     margin: 0px 10px 20px 10px;
     display: flex;
     flex-direction: column;
@@ -73,8 +75,6 @@ export default function HospitalRoomBlockComponent(props) {
     const [clinicObj, setClinicObj] = props.clinicState;
     let roomNumber = useFormInput(props.element.roomNumber);
     let capacity = useFormInput(props.element.capacity);
-    console.log(props.element);
-    console.log(clinicObj);
 
     const updateRoomCharacteristic = (e) => {
         e.preventDefault();
