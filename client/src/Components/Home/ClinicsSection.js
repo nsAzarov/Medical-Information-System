@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
+import {ChoiceTitle, Section} from './Main';
 import {Container} from '../Master/Container';
 import {AddNewBlock} from '../Master/AddNewBlock';
 
@@ -32,19 +33,11 @@ const ClinicsBlocks = styled.div`
 
 `;
 
-const ChoiceTitle = styled.h3`
-    margin: 20px;
-`;
-
-const ClinicsSec  = styled.section`
-    width: 100%;
-`;
-
 export default function ClinicsSection(props) {
     const [selectedClinic, setSelectedClinic] = props.selectedClinic;
 
     return (
-        <ClinicsSec>
+        <Section>
             <Container>
                 <ChoiceTitle>Выберите клинику</ChoiceTitle>
                 <ClinicsBlocks>
@@ -60,6 +53,6 @@ export default function ClinicsSection(props) {
                     </AddNewBlock>
                 </ClinicsBlocks>
             </Container>
-        </ClinicsSec>
+        </Section>
     )
 }
