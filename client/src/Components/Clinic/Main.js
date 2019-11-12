@@ -111,19 +111,17 @@ export default function Main(props) {
 
     const SaveChanges = () => {
         let clinics = JSON.parse(localStorage.getItem('clinics'));
-        console.log(clinics);
         let tempArr = [];
+
         for (let i = 0; i < clinics.length; i++) {
             if (clinics[i].idClinic !== clinicObj.idClinic) {
                 tempArr.push(clinics[i]);
-                console.log('!=', clinics.idClinic, clinicObj.idClinic, tempArr);
             } else {
                 tempArr.push(clinicObj);
-                console.log('=', tempArr);
             }
         }
+        
         clinics = tempArr;
-        console.log(clinics);
         localStorage.setItem('clinics', JSON.stringify(tempArr));
     }
 
