@@ -36,13 +36,24 @@ const ClinicsBlocks = styled.div`
 export default function ClinicsSection(props) {
     const [selectedClinic, setSelectedClinic] = props.selectedClinic;
 
+    const setSpecializationsArr = (clinic) => {
+        console.log(clinic)
+        let arr = [];
+        for(let i = 0; i < clinic.doctorsList.length; i++) {
+            if (arr.indexOf(clinic.doctorsList[i].specialization) == -1) {
+                arr.push(clinic.doctorsList[i].specialization);
+            }
+        }
+        props.setSpecializations(arr);
+    }
+
     return (
         <Section>
             <Container>
                 <ChoiceTitle>Выберите клинику</ChoiceTitle>
                 <ClinicsBlocks>
                     {props.clinics.map((element, i) => {
-                        return <ClinicOption key={i} onClick={(element) => setSelectedClinic(element)}>
+                        return <ClinicOption key={i} onClick={() => {setSpecializationsArr(props.clinics[i]); setSelectedClinic(props.clinics[i])}}>
                             <img src={element.imgUrl} alt="" />
                         </ClinicOption>
                     })}
