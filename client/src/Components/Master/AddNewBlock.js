@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const AddNewBlock = styled.div`
     height: 100px;
-    width: 220px;
+    width: 198px;
     background: beige;
     border-radius: 8px;
     margin: 0px 10px 20px 10px;

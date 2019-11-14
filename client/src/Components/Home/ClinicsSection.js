@@ -21,7 +21,7 @@ const ClinicOption = styled.div`
     border: 1px solid black;
     border-radius: 8px;
     height: 100px;
-    width: 200px;
+    width: 198px;
     margin: 0 10px 10px 10px;
     img {
         height: 100px;
@@ -30,7 +30,7 @@ const ClinicOption = styled.div`
 
 const ClinicsBlocks = styled.div`
     display: flex;
-
+    flex-wrap: wrap;
 `;
 
 export default function ClinicsSection(props) {

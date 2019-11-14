@@ -9,6 +9,7 @@ const LogoArea = styled(Link)`
         height: 100px;
     }
     display: flex;
+    margin: auto;
     align-items: center;
     font-size: 26px;
     font-weight: bold;
@@ -16,6 +17,7 @@ const LogoArea = styled(Link)`
     color: #4552e6;
     width: 240px;
     text-decoration: none;
+    font-family: 'Work Sans', sans-serif;
 `;
 
 const HeaderSection = styled.header`
