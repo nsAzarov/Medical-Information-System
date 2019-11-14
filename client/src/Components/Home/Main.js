@@ -28,7 +28,7 @@ export default function Main() {
                 <>
                 <SpecializationSection />
                 {specializations.map((element, i) => {
-                    return <h1 onClick={(element) => setSelectedSpecialization(element)}>{element}</h1>
+                    return <h1 key={i} onClick={(element) => setSelectedSpecialization(element)}>{element}</h1>
                 })}
                 {selectedSpecialization ?
                     <>

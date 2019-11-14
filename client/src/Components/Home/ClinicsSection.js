@@ -37,7 +37,6 @@ export default function ClinicsSection(props) {
     const [selectedClinic, setSelectedClinic] = props.selectedClinic;
 
     const setSpecializationsArr = (clinic) => {
-        console.log(clinic)
         let arr = [];
         for(let i = 0; i < clinic.doctorsList.length; i++) {
             if (arr.indexOf(clinic.doctorsList[i].specialization) == -1) {

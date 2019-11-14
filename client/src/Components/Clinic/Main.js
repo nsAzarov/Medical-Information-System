@@ -145,7 +145,7 @@ export default function Main(props) {
                             {doctorsInDB.map((element, i) => {
                                 return <DoctorLine key={i} onClick={() => AddToDoctorsList(element)}>{element.idDoctor}</DoctorLine>
                             })}
-                            <NewDoctor to='/AddNewDoctor'>Новый врач +</NewDoctor>
+                            <NewDoctor to='/AddDoctor'>Новый врач +</NewDoctor>
                         </DoctorsList>
                     </ChooseDoctors>
                     <ChooseDoctors>

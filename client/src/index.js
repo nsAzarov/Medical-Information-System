@@ -10,7 +10,7 @@ import './main.css';
 
 localStorage.setItem('clinics', JSON.stringify([]));
 
-const emptyDoctor = new Doctor(uniqid(), "name", "age", "spec", "exp", "schedule");
+const emptyDoctor = new Doctor(uniqid(), "img", "name", "age", "spec", "exp", "schedule");
 localStorage.setItem('doctors', JSON.stringify([emptyDoctor]));
 
 ReactDOM.render(<Router />, document.getElementById('root'));

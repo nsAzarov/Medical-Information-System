@@ -33,8 +33,9 @@ class Visit {
 }
 
 class Doctor {
-    constructor(idDoctor, name, age, specialization, experience, schedule) {
+    constructor(idDoctor, imgUrl, name, age, specialization, experience, schedule) {
         this.idDoctor = idDoctor;
+        this.imgUrl = imgUrl;
         this.name = name;
         this.age = age;
         this.specialization = specialization;
