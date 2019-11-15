@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const FooterSection = styled.footer`
     position: fixed;
     bottom: 0px;
-    height: 50px;
+    height: 30px;
     width: 100%;
     background: whitesmoke;
     display: flex;

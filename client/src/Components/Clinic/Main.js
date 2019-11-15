@@ -143,7 +143,7 @@ export default function Main(props) {
                         <h4>Все врачи в базе данных</h4>
                         <DoctorsList>
                             {doctorsInDB.map((element, i) => {
-                                return <DoctorLine key={i} onClick={() => AddToDoctorsList(element)}>{element.idDoctor}</DoctorLine>
+                            return <DoctorLine key={i} onClick={() => AddToDoctorsList(element)}>{element.specialization} - {element.name}</DoctorLine>
                             })}
                             <NewDoctor to='/AddDoctor'>Новый врач +</NewDoctor>
                         </DoctorsList>
@@ -152,7 +152,7 @@ export default function Main(props) {
                         <h4>Работающие в клинике</h4>
                         <DoctorsList>
                             {clinicObj.doctorsList.map((element, i) => {
-                                return <DoctorLine key={i} onClick={() => RemoveFromDoctorsList(element)}>{element.idDoctor}</DoctorLine>
+                            return <DoctorLine key={i} onClick={() => RemoveFromDoctorsList(element)}>{element.idDoctor}</DoctorLine>
                             })}
                         </DoctorsList>
                     </ChooseDoctors>

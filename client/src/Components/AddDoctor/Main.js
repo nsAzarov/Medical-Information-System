@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import uniqid from 'uniqid';
 
 import {Container} from '../Master/Container';
-import {Clinic, Doctor} from '../../classes';
+import {Clinic, Doctor, Visit} from '../../classes';
 import {useFormInput} from '../Master/functions';
 
 const AddNewClinic = styled.div`
@@ -51,11 +51,32 @@ export default function Main() {
     const specialization = useFormInput('');
     const age = useFormInput('');
     const experience = useFormInput('');
+
     const createNewDoctorObject = (e) => {
         e.preventDefault();
 
+        const dayNames = ['Пн.', 'Вт.', 'Ср.', 'Чт.', 'Пт.', 'Сб.', 'Вс.'];
+        const timePeriods = [
+            '09:00-09:20', '09:20-09:40', '09:40-10:00', 
+            '10:00-10:20', '10:20-10:40', '10:40-11:00', 
+            '11:00-11:20', '11:20-11:40', '11:40-12:00', 
+            '12:00-12:20', '12:20-12:40', '12:40-13:00', 
+            '13:00-13:20', '13:20-13:40', '13:40-14:00', 
+            '14:00-14:20', '14:20-14:40', '14:40-15:00', 
+            '15:00-15:20', '15:20-15:40', '15:40-16:00',  
+            '16:00-16:20', '16:20-16:40', '16:40-17:00'];
+        
+        let visitsList = [];
+
+        for (let i = 0; i < timePeriods.length; i++) {
+            for (let j = 0; j < 7; j++) {
+                const visitObj = new Visit(uniqid(), dayNames[j], timePeriods[i]);
+                visitsList.push(visitObj);
+            }
+        }
+
         const id = uniqid();
-        const newObj = new Doctor(id, imgUrl.value, name.value, specialization.value, age.value, experience.value);
+        const newObj = new Doctor(id, imgUrl.value, name.value, age.value, specialization.value, experience.value, visitsList);
         setNewObj(newObj);
 
         let doctors = JSON.parse(localStorage.getItem('doctors'));

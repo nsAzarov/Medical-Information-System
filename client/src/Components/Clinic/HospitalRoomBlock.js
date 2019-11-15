@@ -36,7 +36,7 @@ const Form = styled.form`
         visibility: hidden;
         border: 1px solid grey;
         border-radius: 3px;
-        width: 80px;
+        width: 90px;
         margin-top: 0;
     }
 `;

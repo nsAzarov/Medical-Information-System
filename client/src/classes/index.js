@@ -21,12 +21,15 @@ class HospitalRoom {
 }
 
 class Visit {
-    constructor(idDoctor, idPatient, date, timePeriodNumber) {
-        this.idDoctor = idDoctor;
-        this.idPatient = idPatient;
-        this.date = date;
-        this.timePeriodNumber = timePeriodNumber;
+    constructor(idVisit, dayName, timePeriod) {
+        this.idVisit = idVisit;
+        this.dayName = dayName;
+        this.timePeriod = timePeriod;
     }
+    idDoctor = '';
+    idPatient = '';
+    data = '';
+    timePeriodNumber = 0;
     info = () => {
         console.log(this.name);
     }
