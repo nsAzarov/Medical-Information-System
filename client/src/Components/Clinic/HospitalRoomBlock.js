@@ -12,7 +12,7 @@ const Form = styled.form`
     position: absolute;
     bottom: 0;
     height: 100px;
-    width: 220px;
+    width: 200px;
     border-radius: 8px;
     background: beige;
     transition: .3s;
@@ -57,7 +57,7 @@ const HospitalRoomBlock = styled.div`
         }
     }
     height: 100px;
-    width: 220px;
+    width: 200px;
     background: beige;
     border-radius: 8px;
     margin: 0px 10px 20px 10px;

@@ -82,7 +82,7 @@ export default function Main() {
         let doctors = JSON.parse(localStorage.getItem('doctors'));
         doctors.push(newObj);
         localStorage.setItem('doctors', JSON.stringify(doctors));
-        console.log(newObj);
+        
         setNewObjStringified(JSON.stringify(newObj));
         setObjectCreatedSuccessfully(true);
     }

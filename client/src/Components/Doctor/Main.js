@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {Container} from '../Master/Container';
-import {Clinic} from '../../classes';
+import {Clinic, Doctor, Visit} from '../../classes';
 
 const ScheduleBlock = styled.div`
     height: 40px;
@@ -11,6 +11,7 @@ const ScheduleBlock = styled.div`
     border: 1px solid #dcdcdc;
     font-size: 14px;
     text-align: center;
+    background: ${props => props.active ? 'white' : 'whitesmoke'};
 `;
 
 const Schedule = styled.div`
@@ -57,6 +58,20 @@ export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
     const [doctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
 
+    const changeActivity = (idVisit) => {
+        const tempObj = new Doctor(doctorObj.idDoctor, doctorObj.imgUrl, doctorObj.name, doctorObj.age, doctorObj.specialization, doctorObj.experience, doctorObj.schedule);
+        for(let i = 0; i < tempObj.schedule.length; i++) {
+            if (tempObj.schedule[i].idVisit === idVisit) {
+                const tempVisitObj = new Visit(tempObj.schedule[i].idVisit, tempObj.schedule[i].dayName, tempObj.schedule[i].timePeriod);
+                tempVisitObj.active = tempObj.schedule[i].active;
+                tempVisitObj.active ? tempVisitObj.setNotActive() : tempVisitObj.setActive();
+                tempObj.schedule[i] = tempVisitObj;
+                break;
+            }
+        }
+        setDoctorObj(tempObj);
+    }
+
     const SaveChanges = () => {
         let clinics = JSON.parse(localStorage.getItem('clinics'));
         let tempArr = [];
@@ -92,7 +107,7 @@ export default function Main(props) {
                     <Schedule>
                         <h3>Расписание врача</h3>
                         {doctorObj.schedule.map((element, i) => {
-                        return <ScheduleBlock>{element.dayName}{element.timePeriod}</ScheduleBlock>
+                        return <ScheduleBlock key={i} onClick={() => changeActivity(element.idVisit)} active={element.active} >{element.dayName}{element.timePeriod}</ScheduleBlock>
                         })}
                     </Schedule>
                 </Container>

@@ -7,7 +7,7 @@ import {AddNewBlock} from '../Master/AddNewBlock';
 import {Clinic, HospitalRoom} from '../../classes';
 
 const HospitalRooms = styled.div`
-    width: 960px;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
 `;

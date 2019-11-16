@@ -29,10 +29,10 @@ class Visit {
     idDoctor = '';
     idPatient = '';
     data = '';
+    active = false;
     timePeriodNumber = 0;
-    info = () => {
-        console.log(this.name);
-    }
+    setActive = () => {this.active = true};
+    setNotActive = () => {this.active = false};
 }
 
 class Doctor {

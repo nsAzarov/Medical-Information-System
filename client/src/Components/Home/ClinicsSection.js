@@ -5,26 +5,38 @@ import styled from 'styled-components';
 import {ChoiceTitle, Section} from './Main';
 import {Container} from '../Master/Container';
 import {AddNewBlock} from '../Master/AddNewBlock';
+import edit from '../../images/edit.png';
 
 const AddNewClinic = styled(Link)`
     height: 100%;
     width: 100%;
     position: absolute;
-    border: 1px solid black;
+    border: 1px solid #dcdcdc;
     border-radius: 8px;
 `;
 
 const ClinicOption = styled.div`
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid #dcdcdc;
     border-radius: 8px;
     height: 100px;
     width: 198px;
     margin: 0 10px 10px 10px;
     img {
         height: 100px;
+    }
+    a {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        height: 25px;
+        width: 25px;
+        img {
+            height: 100%;
+        }
     }
 `;
 
@@ -54,6 +66,12 @@ export default function ClinicsSection(props) {
                     {props.clinics.map((element, i) => {
                         return <ClinicOption key={i} onClick={() => {setSpecializationsArr(props.clinics[i]); setSelectedClinic(props.clinics[i])}}>
                             <img src={element.imgUrl} alt="" />
+                            <Link to={{
+                                pathname: `/Clinic/${element.idClinic}`,
+                                state: {clinicObj: JSON.stringify(element)}
+                                }}>
+                                <img src={require("../../images/edit.png")} alt="edit" />
+                            </Link>
                         </ClinicOption>
                     })}
                     <AddNewBlock>
