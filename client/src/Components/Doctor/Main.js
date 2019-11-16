@@ -1,9 +1,8 @@
 import React, {Fragment, useState} from 'react';
-import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {Container} from '../Master/Container';
-import {Clinic, Doctor, Visit} from '../../classes';
+import {Doctor, Visit} from '../../classes';
 
 const ScheduleBlock = styled.div`
     height: 40px;
@@ -56,7 +55,6 @@ const SaveChangesButton = styled.button`
 
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
-    const [doctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
 
     const changeActivity = (idVisit) => {
         const tempObj = new Doctor(doctorObj.idDoctor, doctorObj.imgUrl, doctorObj.name, doctorObj.age, doctorObj.specialization, doctorObj.experience, doctorObj.schedule);

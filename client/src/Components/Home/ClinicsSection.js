@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {ChoiceTitle, Section} from './Main';
 import {Container} from '../Master/Container';
 import {AddNewBlock} from '../Master/AddNewBlock';
-import edit from '../../images/edit.png';
 
 const AddNewClinic = styled(Link)`
     height: 100%;
@@ -46,12 +45,10 @@ const ClinicsBlocks = styled.div`
 `;
 
 export default function ClinicsSection(props) {
-    const [selectedClinic, setSelectedClinic] = props.selectedClinic;
-
     const setSpecializationsArr = (clinic) => {
         let arr = [];
         for(let i = 0; i < clinic.doctorsList.length; i++) {
-            if (arr.indexOf(clinic.doctorsList[i].specialization) == -1) {
+            if (arr.indexOf(clinic.doctorsList[i].specialization) === -1) {
                 arr.push(clinic.doctorsList[i].specialization);
             }
         }
@@ -64,7 +61,7 @@ export default function ClinicsSection(props) {
                 <ChoiceTitle>Выберите клинику</ChoiceTitle>
                 <ClinicsBlocks>
                     {props.clinics.map((element, i) => {
-                        return <ClinicOption key={i} onClick={() => {setSpecializationsArr(props.clinics[i]); setSelectedClinic(props.clinics[i])}}>
+                        return <ClinicOption key={i} onClick={() => {setSpecializationsArr(props.clinics[i]); props.setSelectedClinic(props.clinics[i])}}>
                             <img src={element.imgUrl} alt="" />
                             <Link to={{
                                 pathname: `/Clinic/${element.idClinic}`,

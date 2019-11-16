@@ -23,7 +23,7 @@ export default function Main() {
     
     return (
         <Fragment>
-            <ClinicsSection clinics={clinics} selectedClinic={[selectedClinic, setSelectedClinic]} setSpecializations={setSpecializations} />
+            <ClinicsSection clinics={clinics} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} />
             {selectedClinic ?
                 <>
                 <SpecializationSection />

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import uniqid from 'uniqid';
 
 import {Container} from '../Master/Container';
-import {Clinic, Doctor, Visit} from '../../classes';
+import {Doctor, Visit} from '../../classes';
 import {useFormInput} from '../Master/functions';
 
 const AddNewClinic = styled.div`

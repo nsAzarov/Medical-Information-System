@@ -1,6 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import styled from 'styled-components';
+import React from 'react';
 
 import {ChoiceTitle, Section} from './Main';
 import {Container} from '../Master/Container';
