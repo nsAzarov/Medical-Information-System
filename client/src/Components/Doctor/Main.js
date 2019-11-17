@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import {Container} from '../Master/Container';
 import {Doctor, Visit} from '../../classes';
+import {SaveChangesButton} from '../Master/SaveChangesButton';
 
 const ScheduleBlock = styled.div`
     height: 40px;
@@ -46,13 +47,6 @@ const InfoSection = styled.section`
     align-items: center;
 `;
 
-const SaveChangesButton = styled.button`
-    padding: 8px 14px;
-    margin: 20px auto;
-    border: 1px solid blue;
-    border-radius: 3px;
-`;
-
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
 
@@ -71,19 +65,19 @@ export default function Main(props) {
     }
 
     const SaveChanges = () => {
-        let clinics = JSON.parse(localStorage.getItem('clinics'));
+        let doctors = JSON.parse(localStorage.getItem('doctors'));
         let tempArr = [];
 
-        for (let i = 0; i < clinics.length; i++) {
-            if (clinics[i].idClinic !== doctorObj.idClinic) {
-                tempArr.push(clinics[i]);
+        for (let i = 0; i < doctors.length; i++) {
+            if (doctors[i].idDoctor !== doctorObj.idDoctor) {
+                tempArr.push(doctors[i]);
             } else {
                 tempArr.push(doctorObj);
             }
         }
         
-        clinics = tempArr;
-        localStorage.setItem('clinics', JSON.stringify(tempArr));
+        doctors = tempArr;
+        localStorage.setItem('doctors', JSON.stringify(tempArr));
     }
 
     return (
