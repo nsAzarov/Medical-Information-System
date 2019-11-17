@@ -14,6 +14,9 @@ export const ChoiceTitle = styled.h3`
 `;
 
 export const Section = styled.section`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
 `;
 
@@ -57,10 +60,7 @@ export default function Main() {
             <ClinicsSection clinics={clinics} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened}/>
             {selectedClinic ?
                 <>
-                <SpecializationSection />
-                {specializations.map((element, i) => {
-                    return <h1 key={i} onClick={(element) => setSelectedSpecialization(element)}>{element}</h1>
-                })}
+                <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization}/>
                 {selectedSpecialization ?
                     <>
                     <DoctorsSection />

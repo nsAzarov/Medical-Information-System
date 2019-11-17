@@ -2,6 +2,7 @@ import React, {Fragment, useState} from 'react';
 import styled from 'styled-components';
 
 import {Container} from '../Master/Container';
+import {InfoSection} from '../Master/InfoSection';
 import {Doctor, Visit} from '../../classes';
 import {SaveChangesButton} from '../Master/SaveChangesButton';
 
@@ -18,7 +19,7 @@ const Schedule = styled.div`
     h3 {
         width: 100%;
         text-align: center;
-        margin-bottom: 30px;
+        margin: 25px;
     }
     display: flex;
     flex-wrap: wrap;
@@ -39,12 +40,6 @@ const Info = styled.div`
 
 const Photo = styled.img`
     max-height: 300px;
-`;
-
-const InfoSection = styled.section`
-    display: flex;
-    justify-content: center;
-    align-items: center;
 `;
 
 export default function Main(props) {
@@ -82,8 +77,8 @@ export default function Main(props) {
 
     return (
         <Fragment>
-            <Container>
-                <InfoSection>
+            <InfoSection>
+                <Container>
                     <Photo src={doctorObj.imgUrl} alt='Photo' />
                     <Info>
                         <h3>{doctorObj.name}</h3>
@@ -91,9 +86,9 @@ export default function Main(props) {
                         <h4>Возраст: {doctorObj.age}</h4>
                         <h4>Опыт: {doctorObj.experience}</h4>
                     </Info>
-                </InfoSection>
-                <hr />
-            </Container>
+                </Container>
+            </InfoSection>
+            <hr />
             <ScheduleSection>
                 <Container>
                     <Schedule>
@@ -104,8 +99,8 @@ export default function Main(props) {
                     </Schedule>
                 </Container>
             </ScheduleSection>
+            <hr />
             <Container>
-                <hr />
                 <SaveChangesButton onClick={() => SaveChanges()}>Сохранить изменения</SaveChangesButton>
             </Container>
         </Fragment>
