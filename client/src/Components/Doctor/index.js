@@ -8,7 +8,7 @@ export default function Doctor(props) {
     return (
         <Fragment>
             <Header />
-            <Main doctorObj={props.location.state.newObjStringified}/>
+            <Main doctorObj={props.location.state.doctorObj}/>
             <Footer />
         </Fragment>
     )
