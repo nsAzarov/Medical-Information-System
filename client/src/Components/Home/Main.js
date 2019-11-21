@@ -7,6 +7,7 @@ import SpecializationSection from './SpecializationSection';
 import TimetableSection from './TimetableSection';
 import LoginSection from './LoginSection';
 
+import {Container} from '../Master/Container';
 import {ModalBackground, DeleteModal} from '../Master/Modal.js';
 
 export const ChoiceTitle = styled.h3`
@@ -18,6 +19,9 @@ export const Section = styled.section`
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    ${Container} {
+        padding-bottom: 0;
+    }
 `;
 
 export default function Main() {
@@ -50,8 +54,8 @@ export default function Main() {
                 <h4>Вы действительно хотите удалить эту клинику из Базы Данных?</h4>
                 <img src={removableClinic.imgUrl} alt='logo-img' />
                 <div id='btn-area'>
-                    <button onClick={() => {deleteClinicFromDB(); setDeleteModalOpened(false);}}>Да</button>
-                    <button onClick={() => setDeleteModalOpened(false)} >Нет</button>
+                    <button onClick={() => {deleteClinicFromDB(); setDeleteModalOpened(false)}}>Да</button>
+                    <button onClick={() => setDeleteModalOpened(false)}>Нет</button>
                 </div>
             </DeleteModal>
             </>
