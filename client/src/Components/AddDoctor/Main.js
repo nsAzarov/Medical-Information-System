@@ -65,17 +65,23 @@ export default function Main() {
             '15:00-15:20', '15:20-15:40', '15:40-16:00',  
             '16:00-16:20', '16:20-16:40', '16:40-17:00'];
         
-        let visitsList = [];
+        let schedule = [{dayName: 'Monday', visits: []}, 
+                        {dayName: 'Tuesday', visits: []}, 
+                        {dayName: 'Wednesday', visits: []}, 
+                        {dayName: 'Thursday', visits: []}, 
+                        {dayName: 'Friday', visits: []}, 
+                        {dayName: 'Saturday', visits: []}, 
+                        {dayName: 'Sunday', visits: []}];
 
         for (let i = 0; i < timePeriods.length; i++) {
             for (let j = 0; j < 7; j++) {
                 const visitObj = new Visit(uniqid(), dayNames[j], timePeriods[i]);
-                visitsList.push(visitObj);
+                schedule[j].visits.push(visitObj);
             }
         }
 
         const id = uniqid();
-        const newObj = new Doctor(id, imgUrl.value, name.value, age.value, specialization.value, experience.value, visitsList);
+        const newObj = new Doctor(id, imgUrl.value, name.value, age.value, specialization.value, experience.value, schedule);
         setNewObj(newObj);
 
         let doctors = JSON.parse(localStorage.getItem('doctors'));

@@ -11,6 +11,10 @@ export const Schedule = styled.div`
     justify-content: center;
 `;
 
+export const DayBlock = styled.div`
+
+`;
+
 export const ScheduleBlock = styled.div`
     height: 40px;
     width: 155px;

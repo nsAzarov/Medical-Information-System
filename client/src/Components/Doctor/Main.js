@@ -5,7 +5,7 @@ import {Container} from '../Master/Container';
 import {InfoSection} from '../Master/InfoSection';
 import {Doctor, Visit} from '../../classes';
 import {SaveChangesButton} from '../Master/SaveChangesButton';
-import {Schedule, ScheduleBlock} from '../Master/Schedule';
+import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
 
 const ScheduleSection = styled.section`
     width: 100%;
@@ -75,7 +75,11 @@ export default function Main(props) {
                     <Schedule>
                         <h3>Расписание врача</h3>
                         {doctorObj.schedule.map((element, i) => {
-                        return <ScheduleBlock key={i} onClick={() => changeActivity(element.idVisit)} active={element.active} >{element.dayName}{element.timePeriod}</ScheduleBlock>
+                            return <DayBlock key={i}>
+                                {element.visits.map((element, i) => {
+                                return <ScheduleBlock key={i} onClick={() => changeActivity(element.idVisit)} active={element.active} >{element.dayName}{element.timePeriod}</ScheduleBlock>
+                                })}
+                            </DayBlock>
                         })}
                     </Schedule>
                 </Container>
