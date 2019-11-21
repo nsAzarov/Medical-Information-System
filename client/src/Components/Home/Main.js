@@ -29,6 +29,7 @@ export default function Main() {
     const [selectedClinic, setSelectedClinic] = useState('');
     const [specializations, setSpecializations] = useState([]);
     const [selectedSpecialization, setSelectedSpecialization] = useState('');
+    const [selectedDoctor, setSelectedDoctor] = useState('')
 
     const [removableClinic, setRemovableClinic] = useState({});
     const [deleteModalOpened, setDeleteModalOpened] = useState(false);
@@ -67,9 +68,15 @@ export default function Main() {
                 <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} />
                 {selectedSpecialization ?
                     <>
-                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctors={selectedClinic.doctorsList}/>
-                    <TimetableSection />
-                    <LoginSection />
+                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctors={selectedClinic.doctorsList} setSelectedDoctor={setSelectedDoctor} />
+                    {selectedDoctor ?
+                        <>
+                        <TimetableSection />
+                        <LoginSection />
+                        </>
+                        :
+                        null
+                    }
                     </>
                     :
                     null
