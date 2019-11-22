@@ -43,8 +43,9 @@ class Doctor {
         this.age = age;
         this.specialization = specialization;
         this.experience = experience;
-        this.schedule = schedule; //массив объектов. каждый день отдельный объект. поля: дата, время начала, время окончания работы
+        this.schedule = schedule; 
     }
+    clinicsID = [];
 }
 
 class Patient {
