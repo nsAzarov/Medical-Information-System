@@ -25,22 +25,25 @@ const Photo = styled.img`
 
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
-
+    console.log(doctorObj);
     const changeActivity = (idVisit) => {
         const tempObj = new Doctor(doctorObj.idDoctor, doctorObj.imgUrl, doctorObj.name, doctorObj.age, doctorObj.specialization, doctorObj.experience, doctorObj.schedule);
         for(let i = 0; i < tempObj.schedule.length; i++) {
-            if (tempObj.schedule[i].idVisit === idVisit) {
-                const tempVisitObj = new Visit(tempObj.schedule[i].idVisit, tempObj.schedule[i].dayName, tempObj.schedule[i].timePeriod);
-                tempVisitObj.active = tempObj.schedule[i].active;
-                tempVisitObj.active ? tempVisitObj.setNotActive() : tempVisitObj.setActive();
-                tempObj.schedule[i] = tempVisitObj;
-                break;
+            for (let j = 0; j < tempObj.schedule[i].visits.length; j++) {
+                if (tempObj.schedule[i].visits[j].idVisit === idVisit) {
+                    const tempVisitObj = new Visit(tempObj.schedule[i].visits[j].idVisit, tempObj.schedule[i].visits[j].dayName, tempObj.schedule[i].visits[j].timePeriod);
+                    tempVisitObj.active = tempObj.schedule[i].visits[j].active;
+                    tempVisitObj.active ? tempVisitObj.setNotActive() : tempVisitObj.setActive();
+                    tempObj.schedule[i].visits[j] = tempVisitObj;
+                    break;
+                }
             }
         }
         setDoctorObj(tempObj);
     }
 
     const SaveChanges = () => {
+        console.log(doctorObj);
         let doctors = JSON.parse(localStorage.getItem('doctors'));
         let tempArr = [];
 

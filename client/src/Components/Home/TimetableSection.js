@@ -12,8 +12,10 @@ export default function TimetableSection(props) {
                 <Schedule>
                     {props.doctorObj.schedule.map((element, i) => {
                         return <DayBlock key={i}>
-                            {element.visits.map((element, i) => {
-                            return <ScheduleBlock key={i} active={element.active} >{element.dayName}{element.timePeriod}</ScheduleBlock>
+                            {element.visits.map((el, i) => {
+                                if (el.active) {
+                                    return <ScheduleBlock key={i} active={el.active} >{el.dayName}{el.timePeriod}</ScheduleBlock>    
+                                }
                             })}
                         </DayBlock>
                     })}
