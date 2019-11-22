@@ -10,12 +10,14 @@ export default function DoctorsSection(props) {
             <Container>
                 <ChoiceTitle>Выберите врача</ChoiceTitle>
                 <Blocks>
-                    {props.doctors.map((element, i) => {
-                        if (element.specialization === props.selectedSpecialization) {
-                            return <Option key={i} onClick={() => props.setSelectedDoctor(element)}>
-                                <img src={element.imgUrl} alt="" />
-                                {element.name}
-                            </Option>
+                    {props.doctorsID.map((element, i) => {
+                        for (let j = 0; j < props.doctorsInDB.length; j++) {
+                            if ((props.doctorsInDB[j].idDoctor === element) && (props.doctorsInDB[j].specialization === props.selectedSpecialization)) {
+                                return <Option key={i} onClick={() => props.setSelectedDoctor(props.doctorsInDB[j])}>
+                                    <img src={props.doctorsInDB[j].imgUrl} alt="" />
+                                    {props.doctorsInDB[j].name}
+                                </Option>
+                            }
                         }
                     })}
                 </Blocks>

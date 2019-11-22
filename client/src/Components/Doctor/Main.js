@@ -25,7 +25,7 @@ const Photo = styled.img`
 
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
-    console.log(doctorObj);
+    
     const changeActivity = (idVisit) => {
         const tempObj = new Doctor(doctorObj.idDoctor, doctorObj.imgUrl, doctorObj.name, doctorObj.age, doctorObj.specialization, doctorObj.experience, doctorObj.schedule);
         for(let i = 0; i < tempObj.schedule.length; i++) {
@@ -43,7 +43,6 @@ export default function Main(props) {
     }
 
     const SaveChanges = () => {
-        console.log(doctorObj);
         let doctors = JSON.parse(localStorage.getItem('doctors'));
         let tempArr = [];
 

@@ -26,6 +26,7 @@ export const Section = styled.section`
 
 export default function Main() {
     const [clinics, setClinics] = useState(JSON.parse(localStorage.getItem('clinics')));
+    const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [selectedClinic, setSelectedClinic] = useState('');
     const [specializations, setSpecializations] = useState([]);
     const [selectedSpecialization, setSelectedSpecialization] = useState('');
@@ -68,7 +69,7 @@ export default function Main() {
                 <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} />
                 {selectedSpecialization ?
                     <>
-                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctors={selectedClinic.doctorsList} setSelectedDoctor={setSelectedDoctor} />
+                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctorsID={selectedClinic.doctorsList} doctorsInDB={doctorsInDB} setSelectedDoctor={setSelectedDoctor} />
                     {selectedDoctor ?
                         <>
                         <TimetableSection doctorObj={selectedDoctor}/>

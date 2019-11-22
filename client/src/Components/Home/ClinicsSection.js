@@ -17,10 +17,14 @@ const AddNewClinic = styled(Link)`
 
 export default function ClinicsSection(props) {
     const setSpecializationsArr = (clinic) => {
+        let doctors = JSON.parse(localStorage.getItem('doctors'));
         let arr = [];
+        
         for(let i = 0; i < clinic.doctorsList.length; i++) {
-            if (arr.indexOf(clinic.doctorsList[i].specialization) === -1) {
-                arr.push(clinic.doctorsList[i].specialization);
+            for (let j = 0; j < doctors.length; j++) {
+                if ((clinic.doctorsList[i] === doctors[j].idDoctor) && (arr.indexOf(doctors[j].specialization) === -1)) {
+                    arr.push(doctors[j].specialization);
+                }
             }
         }
         props.setSpecializations(arr);
@@ -29,7 +33,7 @@ export default function ClinicsSection(props) {
     const deleteClinicFromDB = () => {
         let tempArr = [];
         for (let i = 0; i < props.clinics.length; i++) {
-            //if (props.clinics[i].idClinic !== removableDoctor.idCoctor) {
+            //if (props.clinics[i].idClinic !== removableDoctor.idDoctor) {
             //    tempArr.push(props.clinics[i])
             //}
         }
