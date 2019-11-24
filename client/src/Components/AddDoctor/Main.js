@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Redirect} from 'react-router';
+import axios from 'axios';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 
@@ -88,6 +89,14 @@ export default function Main() {
         doctors.push(newObj);
         localStorage.setItem('doctors', JSON.stringify(doctors));
         
+        axios
+            .post("/AddDoctor", {ImgUrl: imgUrl.value, Name: name.value, Specialization: specialization.value, Age: age.value, Experience: experience.value, Schedule: schedule})
+            .then(response => {console.log(response)})
+            .catch(error => {console.log(error)})
+            //.post("/AddDoctor", {imgUrl1: "newObj.imgUrl", name1: "newObj.name", specialization1: "newObj.specialization", age1: 12, experience1: 12, schedule1: [123]})
+            //.post("/AddDoctor", {imgUrl: newObj.imgUrl, name: newObj.name, specialization: newObj.specialization, age: newObj.age, experience: newObj.experience, schedule: newObj.schedule})
+            //.post("/AddDoctor", {imgUrl: imgUrl.value, name: name.value, specialization: specialization.value, age: age.value, experience: experience.value, schedule})
+
         setObjectCreatedSuccessfully(true);
     }
     return (
