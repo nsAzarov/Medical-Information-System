@@ -63,10 +63,10 @@ export default function Main() {
             </>
             :
             null}
-            <ClinicsSection clinics={clinics} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened}/>
+            <ClinicsSection clinics={clinics} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} />
             {selectedClinic ?
                 <>
-                <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} />
+                <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} />
                 {selectedSpecialization ?
                     <>
                     <DoctorsSection selectedSpecialization={selectedSpecialization} doctorsID={selectedClinic.doctorsList} doctorsInDB={doctorsInDB} setSelectedDoctor={setSelectedDoctor} />
