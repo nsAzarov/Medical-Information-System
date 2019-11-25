@@ -51,7 +51,7 @@ export default function ClinicsSection(props) {
                         <div id='clickable-area' onClick={() => {setSpecializationsArr(props.clinics[i]); props.setSelectedClinic(props.clinics[i]); props.setSelectedSpecialization(''); props.setSelectedDoctor('')}}></div>
                         <img src={element.imgUrl} alt="" />
                         <Link to={{
-                            pathname: `/Clinic/${element.idClinic}`,
+                            pathname: `/Clinic/${element._id}`,
                             state: {clinicObj: JSON.stringify(element)}
                             }}>
                             <img src={require("../../images/edit.png")} alt="edit" />

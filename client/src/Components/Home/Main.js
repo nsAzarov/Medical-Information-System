@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import styled from 'styled-components';
 
 import ClinicsSection from './ClinicsSection';
@@ -7,8 +7,9 @@ import SpecializationSection from './SpecializationSection';
 import TimetableSection from './TimetableSection';
 import LoginSection from './LoginSection';
 
+import {APIService} from '../Master/ApiService';
 import {Container} from '../Master/Container';
-import {ModalBackground, DeleteModal} from '../Master/Modal.js';
+import {ModalBackground, DeleteModal} from '../Master/Modal';
 
 export const ChoiceTitle = styled.h3`
     margin: 20px;
@@ -25,8 +26,27 @@ export const Section = styled.section`
 `;
 
 export default function Main() {
-    const [clinics, setClinics] = useState(JSON.parse(localStorage.getItem('clinics')));
-    const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
+    const ApiService = new APIService();
+    //const [clinics, setClinics] = useState(JSON.parse(localStorage.getItem('clinics')));
+    //const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
+    const [clinics, setClinics] = useState([]);
+    const [doctorsInDB, setDoctorsInDB] = useState([]);
+
+    useEffect(() => {
+        ApiService
+            .getAllClinics()
+            .then(clinics => {
+                setClinics(clinics);
+                //setLoading(false);
+            });
+        ApiService
+            .getAllDoctors()
+            .then(doctors => {
+                setDoctorsInDB(doctors);
+                //setLoading(false);
+            });
+    }, [ApiService]);
+
     const [selectedClinic, setSelectedClinic] = useState('');
     const [specializations, setSpecializations] = useState([]);
     const [selectedSpecialization, setSelectedSpecialization] = useState('');

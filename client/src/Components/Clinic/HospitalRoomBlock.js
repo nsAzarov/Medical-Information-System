@@ -78,7 +78,7 @@ export default function HospitalRoomBlockComponent(props) {
 
     const updateRoomCharacteristic = (e) => {
         e.preventDefault();
-        let tempObj = new Clinic(clinicObj.idClinic, clinicObj.imgUrl, clinicObj.clinicName);
+        let tempObj = new Clinic(clinicObj.idClinic, clinicObj.imgUrl, clinicObj.name);
         tempObj.doctorsList = clinicObj.doctorsList;
         tempObj.hospitalRoomsList = [];
 

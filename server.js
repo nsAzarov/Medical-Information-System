@@ -43,6 +43,32 @@ app.post('/AddDoctor', (req, response) => {
     })
 })
 
+app.get('/Clinics', (req, res) => {
+    Clinic.find({})
+        .then(clinics => res.json(clinics))
+        .catch(err => console.log(err));
+})
+
+app.get('/Doctors', (req, res) => {
+    Doctor.find({})
+        .then(doctors => res.json(doctors))
+        .catch(err => console.log(err));
+})
+
+app.get('/Clinic/:id', (req, res) => {
+    let ObjID = new mongoose.Types.ObjectId(req.params.id);
+    Clinic.find({ _id: ObjID })
+        .then(clinic => res.json(clinic))
+        .catch(err => console.log(err));
+})
+
+app.get('/Doctor/:id', (req, res) => {
+    let ObjID = new mongoose.Types.ObjectId(req.params.id);
+    Doctor.find({ _id: ObjID })
+        .then(doctor => res.json(doctor))
+        .catch(err => console.log(err));
+})
+
 if (process.env.NODE_ENV === "production") {
     app.use(express.static('client/build'));
 

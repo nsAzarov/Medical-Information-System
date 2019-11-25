@@ -55,13 +55,13 @@ const ClinicName = styled.form`
 export default function Main() {
     const [objectCreatedSuccessfully, setObjectCreatedSuccessfully] = useState(false);
     const [newObj, setNewObj] = useState({});
-    const imgUrl = useFormInput('');
-    const name = useFormInput('');
+    const ImgUrl = useFormInput('');
+    const Name = useFormInput('');
     const createNewClinicObject = (e) => {
         e.preventDefault();
 
         const id = uniqid();
-        const newObj = new Clinic(id, imgUrl.value, name.value);
+        const newObj = new Clinic(id, ImgUrl.value, Name.value);
         setNewObj(newObj);
 
         let clinics = JSON.parse(localStorage.getItem('clinics'));
@@ -69,7 +69,7 @@ export default function Main() {
         localStorage.setItem('clinics', JSON.stringify(clinics));
 
         axios
-            .post("/AddClinic", {ImgUrl: imgUrl.value, Name: name.value, DoctorsList: newObj.doctorsList, HospitalRoomsList: newObj.hospitalRoomsList})
+            .post("/AddClinic", {imgUrl: ImgUrl.value, name: Name.value, doctorsList: newObj.doctorsList, hospitalRoomsList: newObj.hospitalRoomsList})
             .then(response => {console.log(response)})
             .catch(error => {console.log(error)})
 
@@ -78,10 +78,10 @@ export default function Main() {
     return (
         <Container>
             <AddNewClinic>
-                <Logo src={imgUrl.value ? imgUrl.value : 'https://izpk.ru/files/mark/nophoto600.jpg'}/>
+                <Logo src={ImgUrl.value ? ImgUrl.value : 'https://izpk.ru/files/mark/nophoto600.jpg'}/>
                 <ClinicName>
-                    <input {...imgUrl} placeholder="Ссылка на картинку с логотипом"></input>
-                    <input {...name} placeholder="Название клиники"></input>
+                    <input {...ImgUrl} placeholder="Ссылка на картинку с логотипом"></input>
+                    <input {...Name} placeholder="Название клиники"></input>
                     <button onClick={(e) => createNewClinicObject(e)}>Создать</button>
                 </ClinicName>
             </AddNewClinic>
