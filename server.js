@@ -19,6 +19,18 @@ mongoose
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
+const Clinic = require('./models/Clinic');
+
+app.post('/AddClinic', (req, response) => {
+    if(!req.body) return response.sendStatus(400);
+    var clinic = new Clinic(req.body);
+    clinic._id = mongoose.Types.ObjectId();
+    clinic.save((err, clinic) => {
+        if (err) return console.error(err);
+        console.log("Клиника " + clinic.Name + " сохранена в коллекцию clinics.");
+    })
+})
+
 const Doctor = require('./models/Doctor');
 
 app.post('/AddDoctor', (req, response) => {

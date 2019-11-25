@@ -3,19 +3,19 @@ const Schema = mongoose.Schema;
 
 const ClinicSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    imgUrl: {
+    ImgUrl: {
         type: String,
         required: true
     },
-    clinicName: {
+    Name: {
         type: String,
         required: true
     },
-    doctorsList: {
+    DoctorsList: {
         type: Array,
         required: true
     },
-    hospitalRoomsList: {
+    HospitalRoomsList: {
         type: Array,
         required: true
     }

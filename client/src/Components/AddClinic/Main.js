@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Redirect} from 'react-router';
+import axios from 'axios';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 
@@ -66,6 +67,11 @@ export default function Main() {
         let clinics = JSON.parse(localStorage.getItem('clinics'));
         clinics.push(newObj);
         localStorage.setItem('clinics', JSON.stringify(clinics));
+
+        axios
+            .post("/AddClinic", {ImgUrl: imgUrl.value, Name: name.value, DoctorsList: newObj.doctorsList, HospitalRoomsList: newObj.hospitalRoomsList})
+            .then(response => {console.log(response)})
+            .catch(error => {console.log(error)})
 
         setObjectCreatedSuccessfully(true);
     }
