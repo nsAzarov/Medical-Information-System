@@ -15,26 +15,58 @@ app.use(bodyParser.json());*/
 const db = require('./config/keys').mongoURI;
 
 mongoose
-    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
 const Clinic = require('./models/Clinic');
 
-app.post('/AddClinic', (req, response) => {
-    if(!req.body) return response.sendStatus(400);
+app.post('/AddClinic', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
     var clinic = new Clinic(req.body);
     clinic._id = mongoose.Types.ObjectId();
     clinic.save((err, clinic) => {
         if (err) return console.error(err);
-        console.log("Клиника " + clinic.Name + " сохранена в коллекцию clinics.");
+        console.log("Клиника " + clinic.name + " сохранена в коллекцию clinics.");
     })
+})
+
+app.post('/AddToDoctorsList', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+
+    Clinic.findOneAndUpdate(
+        {_id: req.body._id}, 
+        {$push: {doctorsList: req.body.idDoctor}}, 
+        {new: true}, 
+        (error, success) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+    });
+})
+
+app.post('/RemoveFromDoctorsList', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+
+    Clinic.findOneAndUpdate(
+        {_id: req.body._id}, 
+        {$pull: {doctorsList: {$in: [req.body.idDoctor]}}}, 
+        {new: true},
+        (error, success) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+    });
 })
 
 const Doctor = require('./models/Doctor');
 
-app.post('/AddDoctor', (req, response) => {
-    if(!req.body) return response.sendStatus(400);
+app.post('/AddDoctor', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
     var doctor = new Doctor(req.body);
     doctor._id = mongoose.Types.ObjectId();
     doctor.save((err, doctor) => {

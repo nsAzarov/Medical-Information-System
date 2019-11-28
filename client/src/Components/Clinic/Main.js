@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from 'react';
+import axios from 'axios';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -187,16 +188,23 @@ export default function Main(props) {
 
         if (!objectIsAlreadyInList) {
             let tempObj = new Clinic(clinicObj.idClinic, clinicObj.imgUrl, clinicObj.name);
+            tempObj._id = clinicObj._id;
             tempObj.doctorsList = clinicObj.doctorsList;
             tempObj.hospitalRoomsList = clinicObj.hospitalRoomsList;
             tempObj.doctorsList.push(idDoctor);
             //tempObj.addNewDoctorToList(doctorObj);
             setClinicObj(tempObj);
+
+            axios
+                .post("/AddToDoctorsList", {_id: clinicObj._id, idDoctor})
+                .then(response => {console.log(response)})
+                .catch(error => {console.log(error)})
         }
     }
 
     const RemoveFromDoctorsList = (idDoctor) => {
         let tempObj = new Clinic(clinicObj.idClinic, clinicObj.imgUrl, clinicObj.name);
+        tempObj._id = clinicObj._id;
         tempObj.doctorsList = clinicObj.doctorsList;
         tempObj.hospitalRoomsList = clinicObj.hospitalRoomsList;
 
@@ -209,6 +217,11 @@ export default function Main(props) {
         tempObj.doctorsList = tempDoctorsList;
         
         setClinicObj(tempObj);
+        
+        axios
+            .post("/RemoveFromDoctorsList", {_id: clinicObj._id, idDoctor})
+            .then(response => {console.log(response)})
+            .catch(error => {console.log(error)})
     }
 
     const SaveChanges = () => {
