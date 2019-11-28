@@ -63,6 +63,22 @@ app.post('/RemoveFromDoctorsList', (req, res) => {
     });
 })
 
+app.post('/AddNewHospitalRoom', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+    console.log(req.body)
+    Clinic.findOneAndUpdate(
+        {_id: req.body._id}, 
+        {$push: {hospitalRoomsList: req.body.idRoom}}, 
+        {new: true}, 
+        (error, success) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+    });
+})
+
 const Doctor = require('./models/Doctor');
 
 app.post('/AddDoctor', (req, res) => {

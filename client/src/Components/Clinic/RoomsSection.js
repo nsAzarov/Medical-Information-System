@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 
@@ -31,6 +32,7 @@ export default function RoomsSectionComponent(props) {
 
     const addNewHospitalRoomObject = () => {
         let tempObj = new Clinic(clinicObj.idClinic, clinicObj.imgUrl, clinicObj.name);
+        tempObj._id = clinicObj._id;
         tempObj.doctorsList = clinicObj.doctorsList;
         tempObj.hospitalRoomsList = clinicObj.hospitalRoomsList;
 
@@ -38,6 +40,11 @@ export default function RoomsSectionComponent(props) {
         tempObj.hospitalRoomsList.push(newHospitalRoomObject);
 
         setClinicObj(tempObj);
+
+        axios
+            .post("/AddNewHospitalRoom", {_id: clinicObj._id, idRoom: newHospitalRoomObject.idRoom})
+            .then(response => {console.log(response)})
+            .catch(error => {console.log(error)})
     }
     
     return (
