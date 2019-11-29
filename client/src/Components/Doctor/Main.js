@@ -26,7 +26,7 @@ const Photo = styled.img`
 
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
-    console.log(doctorObj)
+
     const changeActivity = (idVisit) => {
         const tempObj = new Doctor(doctorObj.idDoctor, doctorObj.imgUrl, doctorObj.name, doctorObj.age, doctorObj.specialization, doctorObj.experience, doctorObj.schedule);
         tempObj._id = doctorObj._id;

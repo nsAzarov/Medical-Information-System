@@ -5,9 +5,11 @@ import {Container} from '../Master/Container';
 import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
 
 export default function TimetableSection(props) {
-    console.log(props)
+    const Scroll = () => {
+        setTimeout(() => window.scrollTo(0,document.body.scrollHeight), 50)
+    }
     return (
-        <Section style={{paddingBottom: '30px'}}>
+        <Section style={{paddingBottom: '30px'}} id='TimetableSection'>
             <Container>
                 <ChoiceTitle>Выберите время приёма</ChoiceTitle>
                 <Schedule>
@@ -15,7 +17,7 @@ export default function TimetableSection(props) {
                         return <DayBlock key={i}>
                             {element.visits.map((el, i) => {
                                 if (el.active) {
-                                    return <ScheduleBlock key={i} active={el.active} onClick={() => props.setSelectedVisitTime(el)}>{el.dayName}{el.timePeriod}</ScheduleBlock>    
+                                    return <ScheduleBlock key={i} active={el.active} onClick={() => {props.setSelectedVisitTime(el); Scroll()}}>{el.dayName}{el.timePeriod}</ScheduleBlock>    
                                 }
                             })}
                         </DayBlock>
