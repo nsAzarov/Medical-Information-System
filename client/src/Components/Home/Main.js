@@ -5,7 +5,7 @@ import ClinicsSection from './ClinicsSection';
 import DoctorsSection from './DoctorsSection';
 import SpecializationSection from './SpecializationSection';
 import TimetableSection from './TimetableSection';
-import LoginSection from './LoginSection';
+import AppointmentSection from './AppointmentSection';
 
 import {APIService} from '../Master/ApiService';
 import {Container} from '../Master/Container';
@@ -53,7 +53,8 @@ export default function Main() {
     const [selectedClinic, setSelectedClinic] = useState('');
     const [specializations, setSpecializations] = useState([]);
     const [selectedSpecialization, setSelectedSpecialization] = useState('');
-    const [selectedDoctor, setSelectedDoctor] = useState('')
+    const [selectedDoctor, setSelectedDoctor] = useState('');
+    const [selectedVisitTime, setSelectedVisitTime] = useState('');
 
     const [removableClinic, setRemovableClinic] = useState({});
     const [deleteModalOpened, setDeleteModalOpened] = useState(false);
@@ -95,8 +96,12 @@ export default function Main() {
                     <DoctorsSection selectedSpecialization={selectedSpecialization} doctorsIDList={selectedClinic.doctorsList} doctorsInDB={doctorsInDB} setSelectedDoctor={setSelectedDoctor} />
                     {selectedDoctor ?
                         <>
-                        <TimetableSection doctorObj={selectedDoctor}/>
-                        <LoginSection />
+                        <TimetableSection doctorObj={selectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
+                        {selectedVisitTime ? 
+                            <AppointmentSection selectedVisitTime={selectedVisitTime} />
+                            :
+                            null
+                        }
                         </>
                         :
                         null

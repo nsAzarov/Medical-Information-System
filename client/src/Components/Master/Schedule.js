@@ -16,10 +16,14 @@ export const DayBlock = styled.div`
 `;
 
 export const ScheduleBlock = styled.div`
+    cursor: pointer;
     height: 40px;
     width: 155px;
     border: 1px solid #dcdcdc;
     font-size: 14px;
     text-align: center;
     background: ${props => props.active ? 'white' : 'whitesmoke'};
+    &:hover {
+        border: 1px solid black;
+    }
 `;

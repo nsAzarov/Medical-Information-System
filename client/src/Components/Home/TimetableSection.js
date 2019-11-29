@@ -7,7 +7,7 @@ import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
 export default function TimetableSection(props) {
     console.log(props)
     return (
-        <Section>
+        <Section style={{paddingBottom: '30px'}}>
             <Container>
                 <ChoiceTitle>Выберите время приёма</ChoiceTitle>
                 <Schedule>
@@ -15,7 +15,7 @@ export default function TimetableSection(props) {
                         return <DayBlock key={i}>
                             {element.visits.map((el, i) => {
                                 if (el.active) {
-                                    return <ScheduleBlock key={i} active={el.active} >{el.dayName}{el.timePeriod}</ScheduleBlock>    
+                                    return <ScheduleBlock key={i} active={el.active} onClick={() => props.setSelectedVisitTime(el)}>{el.dayName}{el.timePeriod}</ScheduleBlock>    
                                 }
                             })}
                         </DayBlock>
