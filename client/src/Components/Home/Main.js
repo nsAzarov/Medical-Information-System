@@ -92,7 +92,7 @@ export default function Main() {
                 <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} />
                 {selectedSpecialization ?
                     <>
-                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctorsID={selectedClinic.doctorsList} doctorsInDB={doctorsInDB} setSelectedDoctor={setSelectedDoctor} />
+                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctorsIDList={selectedClinic.doctorsList} doctorsInDB={doctorsInDB} setSelectedDoctor={setSelectedDoctor} />
                     {selectedDoctor ?
                         <>
                         <TimetableSection doctorObj={selectedDoctor}/>

@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import {Container} from '../Master/Container';
@@ -25,9 +26,10 @@ const Photo = styled.img`
 
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
-    
+    console.log(doctorObj)
     const changeActivity = (idVisit) => {
         const tempObj = new Doctor(doctorObj.idDoctor, doctorObj.imgUrl, doctorObj.name, doctorObj.age, doctorObj.specialization, doctorObj.experience, doctorObj.schedule);
+        tempObj._id = doctorObj._id;
         for(let i = 0; i < tempObj.schedule.length; i++) {
             for (let j = 0; j < tempObj.schedule[i].visits.length; j++) {
                 if (tempObj.schedule[i].visits[j].idVisit === idVisit) {
@@ -43,19 +45,10 @@ export default function Main(props) {
     }
 
     const SaveChanges = () => {
-        let doctors = JSON.parse(localStorage.getItem('doctors'));
-        let tempArr = [];
-
-        for (let i = 0; i < doctors.length; i++) {
-            if (doctors[i].idDoctor !== doctorObj.idDoctor) {
-                tempArr.push(doctors[i]);
-            } else {
-                tempArr.push(doctorObj);
-            }
-        }
-        
-        doctors = tempArr;
-        localStorage.setItem('doctors', JSON.stringify(tempArr));
+        axios
+            .post("/SaveSchedule", {_id: doctorObj._id, schedule: doctorObj.schedule})
+            .then(response => {console.log(response)})
+            .catch(error => {console.log(error)})
     }
 
     return (
@@ -76,10 +69,10 @@ export default function Main(props) {
                 <Container>
                     <Schedule>
                         <h3>Расписание врача</h3>
-                        {doctorObj.schedule.map((element, i) => {
+                        {doctorObj.schedule.map((day, i) => {
                             return <DayBlock key={i}>
-                                {element.visits.map((element, i) => {
-                                return <ScheduleBlock key={i} onClick={() => changeActivity(element.idVisit)} active={element.active} >{element.dayName}{element.timePeriod}</ScheduleBlock>
+                                {day.visits.map((visit, i) => {
+                                return <ScheduleBlock key={i} onClick={() => changeActivity(visit.idVisit)} active={visit.active} >{visit.dayName}{visit.timePeriod}</ScheduleBlock>
                                 })}
                             </DayBlock>
                         })}

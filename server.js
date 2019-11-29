@@ -91,6 +91,22 @@ app.post('/AddDoctor', (req, res) => {
     })
 })
 
+app.post('/SaveSchedule', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+    
+    Doctor.findOneAndUpdate(
+        {_id: req.body._id}, 
+        {schedule: req.body.schedule}, 
+        {new: true}, 
+        (error, success) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+    });
+})
+
 app.get('/Clinics', (req, res) => {
     Clinic.find({})
         .then(clinics => res.json(clinics))

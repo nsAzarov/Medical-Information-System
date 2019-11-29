@@ -5,6 +5,7 @@ import {Container} from '../Master/Container';
 import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
 
 export default function TimetableSection(props) {
+    console.log(props)
     return (
         <Section>
             <Container>
