@@ -17,13 +17,13 @@ const AddNewClinic = styled(Link)`
 
 export default function ClinicsSection(props) {
     const setSpecializationsArr = (clinic) => {
-        let doctors = JSON.parse(localStorage.getItem('doctors'));
+        //let doctors = JSON.parse(localStorage.getItem('doctors'));
         let arr = [];
         
         for(let i = 0; i < clinic.doctorsList.length; i++) {
-            for (let j = 0; j < doctors.length; j++) {
-                if ((clinic.doctorsList[i] === doctors[j].idDoctor) && (arr.indexOf(doctors[j].specialization) === -1)) {
-                    arr.push(doctors[j].specialization);
+            for (let j = 0; j < props.doctorsInDB.length; j++) {
+                if ((clinic.doctorsList[i] === props.doctorsInDB[j].idDoctor) && (arr.indexOf(props.doctorsInDB[j].specialization) === -1)) {
+                    arr.push(props.doctorsInDB[j].specialization);
                 }
             }
         }
@@ -52,7 +52,10 @@ export default function ClinicsSection(props) {
                         <img src={element.imgUrl} alt="" />
                         <Link to={{
                             pathname: `/Clinic/${element._id}`,
-                            state: {clinicObj: JSON.stringify(element)}
+                            state: {
+                                clinicObj: JSON.stringify(element),
+                                doctorsInDB: props.doctorsInDB    
+                            }
                             }}>
                             <img src={require("../../images/edit.png")} alt="edit" />
                         </Link>

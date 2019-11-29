@@ -39,13 +39,16 @@ export default function Main() {
                 setClinics(clinics);
                 //setLoading(false);
             });
+    }, []);
+
+    useEffect(() => {
         ApiService
             .getAllDoctors()
             .then(doctors => {
                 setDoctorsInDB(doctors);
                 //setLoading(false);
             });
-    }, [ApiService]);
+    }, []);
 
     const [selectedClinic, setSelectedClinic] = useState('');
     const [specializations, setSpecializations] = useState([]);
@@ -65,7 +68,7 @@ export default function Main() {
         setClinics(tempArr);
         localStorage.setItem('clinics', JSON.stringify(tempArr));
     }
-
+    
     return (
         <Fragment>
             {deleteModalOpened ?
@@ -83,7 +86,7 @@ export default function Main() {
             </>
             :
             null}
-            <ClinicsSection clinics={clinics} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} />
+            <ClinicsSection clinics={clinics} doctorsInDB={doctorsInDB} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} />
             {selectedClinic ?
                 <>
                 <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} />

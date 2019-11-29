@@ -45,11 +45,11 @@ const ClinicName = styled.form`
 export default function Main() {
     const [objectCreatedSuccessfully, setObjectCreatedSuccessfully] = useState(false);
     const [newObj, setNewObj] = useState({});
-    const imgUrl = useFormInput('');
-    const name = useFormInput('');
-    const specialization = useFormInput('');
-    const age = useFormInput('');
-    const experience = useFormInput('');
+    const ImgUrl = useFormInput('');
+    const Name = useFormInput('');
+    const Specialization = useFormInput('');
+    const Age = useFormInput('');
+    const Experience = useFormInput('');
 
     const createNewDoctorObject = (e) => {
         e.preventDefault();
@@ -81,7 +81,7 @@ export default function Main() {
         }
 
         const id = uniqid();
-        const newObj = new Doctor(id, imgUrl.value, name.value, age.value, specialization.value, experience.value, schedule);
+        const newObj = new Doctor(id, ImgUrl.value, Name.value, Age.value, Specialization.value, Experience.value, schedule);
         setNewObj(newObj);
 
         let doctors = JSON.parse(localStorage.getItem('doctors'));
@@ -89,7 +89,7 @@ export default function Main() {
         localStorage.setItem('doctors', JSON.stringify(doctors));
         
         axios
-            .post("/AddDoctor", {ImgUrl: imgUrl.value, Name: name.value, Specialization: specialization.value, Age: age.value, Experience: experience.value, Schedule: schedule})
+            .post("/AddDoctor", {idDoctor: newObj.idDoctor, imgUrl: ImgUrl.value, name: Name.value, specialization: Specialization.value, age: Age.value, experience: Experience.value, schedule})
             .then(response => {console.log(response)})
             .catch(error => {console.log(error)})
 
@@ -98,19 +98,19 @@ export default function Main() {
     return (
         <Container>
             <AddNewClinic>
-                <Logo src={imgUrl.value ? imgUrl.value : 'https://izpk.ru/files/mark/nophoto600.jpg'}/>
+                <Logo src={ImgUrl.value ? ImgUrl.value : 'https://izpk.ru/files/mark/nophoto600.jpg'}/>
                 <ClinicName>
-                    <input {...imgUrl} placeholder="Ссылка на фото"></input>
-                    <input {...name} placeholder="Ф.И.О"></input>
-                    <input {...specialization} placeholder="Специализация"></input>
-                    <input {...age} placeholder="Возраст"></input>
-                    <input {...experience} placeholder="Опыт работы"></input>
+                    <input {...ImgUrl} placeholder="Ссылка на фото"></input>
+                    <input {...Name} placeholder="Ф.И.О"></input>
+                    <input {...Specialization} placeholder="Специализация"></input>
+                    <input {...Age} placeholder="Возраст"></input>
+                    <input {...Experience} placeholder="Опыт работы"></input>
                     <button onClick={(e) => createNewDoctorObject(e)}>Создать</button>
                 </ClinicName>
             </AddNewClinic>
             {objectCreatedSuccessfully ? 
             <Redirect to={{
-                pathname: `/Doctor/${newObj.idDoctor}`,
+                pathName: `/Doctor/${newObj.idDoctor}`,
                 state: {doctorObj: JSON.stringify(newObj)}
             }}/>
             :

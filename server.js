@@ -65,7 +65,7 @@ app.post('/RemoveFromDoctorsList', (req, res) => {
 
 app.post('/AddNewHospitalRoom', (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    console.log(req.body)
+
     Clinic.findOneAndUpdate(
         {_id: req.body._id}, 
         {$push: {hospitalRoomsList: req.body.idRoom}}, 
@@ -87,7 +87,7 @@ app.post('/AddDoctor', (req, res) => {
     doctor._id = mongoose.Types.ObjectId();
     doctor.save((err, doctor) => {
         if (err) return console.error(err);
-        console.log("Врач " + doctor.Name + " сохранён в коллекцию doctors.");
+        console.log("Врач " + doctor.name + " сохранён в коллекцию doctors.");
     })
 })
 

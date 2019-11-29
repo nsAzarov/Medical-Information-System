@@ -137,14 +137,14 @@ const DoctorLine = styled.li`
 
 export default function Main(props) {
     const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
-    const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
+    //const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [editorOpened, setEditorOpened] = useState(false);
     const [removableDoctor, setRemovableDoctor] = useState({});
     const [deleteModalOpened, setDeleteModalOpened] = useState(false);
     const imgUrl = useFormInput(clinicObj.imgUrl);
     const clinicName = useFormInput(clinicObj.name);
     
-    const deleteDoctorFromDB = () => {
+    /*const deleteDoctorFromDB = () => {
         let tempArr = [];
         for (let i = 0; i < doctorsInDB.length; i++) {
             if (doctorsInDB[i].idDoctor !== removableDoctor.idDoctor) {
@@ -153,7 +153,7 @@ export default function Main(props) {
         }
         setDoctorsInDB(tempArr);
         localStorage.setItem('doctors', JSON.stringify(tempArr));
-    }
+    }*/
 
     const updateLogoImage = (e) => {
         e.preventDefault();
@@ -256,7 +256,8 @@ export default function Main(props) {
                     <h5>Стаж: {removableDoctor.experience}</h5>
                 </span>
                 <div id='btn-area'>
-                    <button onClick={() => {deleteDoctorFromDB(); setDeleteModalOpened(false);}}>Да</button>
+                    <button onClick={() => {//deleteDoctorFromDB(); 
+                                            setDeleteModalOpened(false);}}>Да</button>
                     <button onClick={() => setDeleteModalOpened(false)} >Нет</button>
                 </div>
             </DeleteModal>
@@ -295,7 +296,7 @@ export default function Main(props) {
                         <ChooseDoctors>
                             <h4>Все врачи в базе данных</h4>
                             <DoctorsList>
-                                {doctorsInDB.map((element, i) => {
+                                {props.doctorsInDB.map((element, i) => {
                                 return <DoctorLine key={i} onClick={() => AddToDoctorsList(element.idDoctor)}>
                                     <div className='clickable-area'></div>
                                     {element.specialization} - {element.name}
@@ -311,8 +312,8 @@ export default function Main(props) {
                         <ChooseDoctors>
                             <h4>Работающие в клинике</h4>
                             <DoctorsList>
-                                {doctorsInDB.map((element, ind) => {
-                                    for (let i = 0; i < doctorsInDB.length; i++) {
+                                {props.doctorsInDB.map((element, ind) => {
+                                    for (let i = 0; i < props.doctorsInDB.length; i++) {
                                         if (clinicObj.doctorsList[i] === element.idDoctor) {
                                             return <DoctorLine key={ind} onClick={() => RemoveFromDoctorsList(element.idDoctor)}>
                                                 <div className='clickable-area'></div>

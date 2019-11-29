@@ -3,27 +3,31 @@ const Schema = mongoose.Schema;
 
 const DoctorSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    ImgUrl: {
+    idDoctor: {
         type: String,
         required: true
     },
-    Name: {
+    imgUrl: {
         type: String,
         required: true
     },
-    Age: {
+    name: {
         type: String,
         required: true
     },
-    Specialization: {
+    age: {
         type: String,
         required: true
     },
-    Experience: {
+    specialization: {
         type: String,
         required: true
     },
-    Schedule: {
+    experience: {
+        type: String,
+        required: true
+    },
+    schedule: {
         type: Array,
         required: true
     }

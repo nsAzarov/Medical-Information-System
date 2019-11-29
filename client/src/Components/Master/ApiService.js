@@ -15,6 +15,10 @@ export class APIService {
         const Doctors = await this.getResource(`/Doctors`);
         return Doctors;
     }
+    async getDoctor(idDoctor) {
+        const Doctors = await this.getResource(`/Doctor/${idDoctor}`);
+        return Doctors;
+    }
     async getTimeDiscountBooks() {
         const Books = await this.getResource(`/TimeDiscount`);
         return Books;
