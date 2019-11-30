@@ -16,7 +16,7 @@ export default function DoctorsSection(props) {
                     {props.doctorsIDList.map((element, i) => {
                         for (let j = 0; j < props.doctorsInDB.length; j++) {
                             if ((props.doctorsInDB[j].idDoctor === element) && (props.doctorsInDB[j].specialization === props.selectedSpecialization)) {
-                                return <Option key={i} onClick={() => {props.setSelectedDoctor(props.doctorsInDB[j]); Scroll()}}>
+                                return <Option key={i} onClick={() => {props.setSelectedDoctor(props.doctorsInDB[j]); props.setSelectedVisitTime(''); Scroll()}}>
                                     <img src={props.doctorsInDB[j].imgUrl} alt="" />
                                     {props.doctorsInDB[j].name}
                                 </Option>

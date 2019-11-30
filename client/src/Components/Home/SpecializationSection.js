@@ -11,7 +11,7 @@ export default function SpecializationSection(props) {
                 <ChoiceTitle>Выберите специализацию врача</ChoiceTitle>
                 <Blocks>
                     {props.specializations.map((element, i) => {
-                    return <Option key={i} onClick={() => {props.setSelectedSpecialization(element); props.setSelectedDoctor('')}}>{element}</Option>
+                    return <Option key={i} onClick={() => {props.setSelectedSpecialization(element); props.setSelectedDoctor(''); props.setSelectedVisitTime('')}}>{element}</Option>
                     })}
                 </Blocks>
             </Container>

@@ -87,13 +87,13 @@ export default function Main() {
             </>
             :
             null}
-            <ClinicsSection clinics={clinics} doctorsInDB={doctorsInDB} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} />
+            <ClinicsSection clinics={clinics} doctorsInDB={doctorsInDB} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
             {selectedClinic ?
                 <>
-                <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} />
+                <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
                 {selectedSpecialization ?
                     <>
-                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctorsIDList={selectedClinic.doctorsList} doctorsInDB={doctorsInDB} setSelectedDoctor={setSelectedDoctor} />
+                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctorsIDList={selectedClinic.doctorsList} doctorsInDB={doctorsInDB} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
                     {selectedDoctor ?
                         <>
                         <TimetableSection doctorObj={selectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>

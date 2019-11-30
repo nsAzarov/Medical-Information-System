@@ -17,7 +17,6 @@ const AddNewClinic = styled(Link)`
 
 export default function ClinicsSection(props) {
     const setSpecializationsArr = (clinic) => {
-        //let doctors = JSON.parse(localStorage.getItem('doctors'));
         let arr = [];
         
         for(let i = 0; i < clinic.doctorsList.length; i++) {
@@ -48,7 +47,7 @@ export default function ClinicsSection(props) {
                 <Blocks>
                     {props.clinics.map((element, i) => {
                     return <Option key={i} >
-                        <div id='clickable-area' onClick={() => {setSpecializationsArr(props.clinics[i]); props.setSelectedClinic(props.clinics[i]); props.setSelectedSpecialization(''); props.setSelectedDoctor('')}}></div>
+                        <div id='clickable-area' onClick={() => {setSpecializationsArr(props.clinics[i]); props.setSelectedClinic(props.clinics[i]); props.setSelectedSpecialization(''); props.setSelectedDoctor(''); props.setSelectedVisitTime('');}}></div>
                         <img src={element.imgUrl} alt="" />
                         <Link to={{
                             pathname: `/Clinic/${element._id}`,
