@@ -10,6 +10,7 @@ import AppointmentSection from './AppointmentSection';
 import {APIService} from '../Master/ApiService';
 import {Container} from '../Master/Container';
 import {ModalBackground, DeleteModal} from '../Master/Modal';
+import {useFormInput} from '../Master/functions';
 
 export const ChoiceTitle = styled.h3`
     margin: 20px;
@@ -22,6 +23,63 @@ export const Section = styled.section`
     width: 100%;
     ${Container} {
         padding-bottom: 0;
+    }
+`;
+
+const ConfirmModal = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    height: 350px;
+    width: 480px;
+    background: white;
+    position: absolute;
+    left: 50%;
+    margin-left: -260px;
+    top: 50%;
+    margin-top: -190px;
+    z-index: 100;
+    svg {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 25px;
+        width: 25px;
+        margin: 5px;
+    }
+    #top-area {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        img:first-child {
+            height: 150px;
+        }
+        img {
+            height: 220px;
+        }
+    }
+    #patient-info {
+        padding: 10px 0;
+        text-align: center;
+    }
+    #appointment-time {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 20px;
+    }
+    #btn-area {
+        display: flex;
+        margin-top: 5px;
+        button {
+            width: 60px;
+            background: beige;
+            border-radius: 3px;
+            &:last-child {
+                margin-left: 10px;
+            }
+        }
     }
 `;
 
@@ -55,9 +113,19 @@ export default function Main() {
     const [selectedSpecialization, setSelectedSpecialization] = useState('');
     const [selectedDoctor, setSelectedDoctor] = useState('');
     const [selectedVisitTime, setSelectedVisitTime] = useState('');
+    const SNILS = useFormInput('');
+    const LnameFname = useFormInput('');
 
     const [removableClinic, setRemovableClinic] = useState({});
     const [deleteModalOpened, setDeleteModalOpened] = useState(false);
+    const [confirmModalOpened, setConfirmModalOpened] = useState(false);
+
+    const [windowHeight, setWindowHeight] = useState(document.body.offsetHeight);
+
+    useEffect(() => {
+        setWindowHeight(document.body.offsetHeight);
+        console.log(windowHeight)
+    }, [document.body.offsetHeight])
 
     const deleteClinicFromDB = () => {
         let tempArr = [];
@@ -87,6 +155,36 @@ export default function Main() {
             </>
             :
             null}
+            {confirmModalOpened ?
+            <>
+            <ModalBackground height={windowHeight} onClick={() => setConfirmModalOpened(false)}/>
+            <ConfirmModal>
+                <svg onClick={() => setConfirmModalOpened(false)} height="511.992pt" viewBox="0 0 511.992 511.992" width="511.992pt" xmlns="http://www.w3.org/2000/svg"><path d="m415.402344 495.421875-159.40625-159.410156-159.40625 159.410156c-22.097656 22.09375-57.921875 22.09375-80.019532 0-22.09375-22.097656-22.09375-57.921875 0-80.019531l159.410157-159.40625-159.410157-159.40625c-22.09375-22.097656-22.09375-57.921875 0-80.019532 22.097657-22.09375 57.921876-22.09375 80.019532 0l159.40625 159.410157 159.40625-159.410157c22.097656-22.09375 57.921875-22.09375 80.019531 0 22.09375 22.097657 22.09375 57.921876 0 80.019532l-159.410156 159.40625 159.410156 159.40625c22.09375 22.097656 22.09375 57.921875 0 80.019531-22.097656 22.09375-57.921875 22.09375-80.019531 0zm0 0" fill="#e76e54"/></svg>
+                <div>
+                    <div id="top-area">
+                        <img src={selectedClinic.imgUrl} alt=""/>
+                        <img src={selectedDoctor.imgUrl} alt=""/>
+                        <div id="doctor-info">
+                            {selectedDoctor.name}<br />
+                            {selectedDoctor.specialization}<br />
+                            Стаж: {selectedDoctor.experience}<br />
+                        </div>
+                    </div>
+                    <div id="appointment-time">
+                        {selectedVisitTime.dayName} {selectedVisitTime.timePeriod}
+                    </div>
+                    <div id="patient-info">
+                        СНИЛС: {SNILS.value}<br />
+                        Ваше Имя: {LnameFname.value}<br />
+                    </div>
+                </div>
+                <div id='btn-area'>
+                    <button onClick={() => {setConfirmModalOpened(false)}}>Да</button>
+                    <button onClick={() => setConfirmModalOpened(false)}>Нет</button>
+                </div>
+            </ConfirmModal>
+            </>
+            :null}
             <ClinicsSection clinics={clinics} doctorsInDB={doctorsInDB} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
             {selectedClinic ?
                 <>
@@ -98,7 +196,7 @@ export default function Main() {
                         <>
                         <TimetableSection doctorObj={selectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
                         {selectedVisitTime ? 
-                            <AppointmentSection selectedVisitTime={selectedVisitTime} />
+                            <AppointmentSection selectedVisitTime={selectedVisitTime} setConfirmModalOpened={setConfirmModalOpened} SNILS={SNILS} LnameFname={LnameFname}/>
                             :
                             null
                         }

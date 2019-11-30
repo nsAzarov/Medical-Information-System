@@ -73,8 +73,10 @@ export default function AppointmentSection(props) {
         }
     }, [props.selectedVisitTime])
 
-    const SNILS = useFormInput('');
-    const LnameFname = useFormInput('');
+    const confirmData = () => {
+        window.scrollTo(0, 0);
+        props.setConfirmModalOpened(true);
+    }
 
     return (
         <Section style={{paddingBottom: '60px'}}>
@@ -83,10 +85,10 @@ export default function AppointmentSection(props) {
                 <SelectedVisitTime>{dayName} {props.selectedVisitTime.timePeriod}</SelectedVisitTime>
                 <AppointmentForm>
                     <h4>Ваш СНИЛС</h4>
-                    <input {...SNILS}/>
+                    <input {...props.SNILS}/>
                     <h4>Фамилия Имя</h4>
-                    <input {...LnameFname}/>
-                    <button>Записаться</button>
+                    <input {...props.LnameFname}/>
+                    <button onClick={e => {e.preventDefault(); confirmData()}}>Записаться</button>
                 </AppointmentForm>
             </Container>
         </Section>
