@@ -140,7 +140,7 @@ export default function Main() {
     }
     
     const makeAppointmentWithDoctor = () => {
-        let appointment = new Appointment(selectedClinic._id, selectedDoctor._id, selectedVisitTime.dayName, selectedVisitTime.timePeriod);
+        let appointment = new Appointment(selectedClinic._id, selectedDoctor._id, selectedVisitTime.dayName, selectedVisitTime.timePeriod, SNILS.value, LnameFname.value);
         
         axios
             .post("/MakeAppointment", {...appointment})

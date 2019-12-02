@@ -22,6 +22,14 @@ const AppointmentSchema = new Schema({
     timePeriod: {
         type: String,
         required: true
+    },
+    SNILS: {
+        type: String,
+        required: true
+    },
+    patientName: {
+        type: String,
+        required: true
     }
 }, {collection: 'Appointments'});
 

@@ -59,11 +59,13 @@ class Patient {
 }
 
 class Appointment {
-    constructor(idClinic, idDoctor, dayName, timePeriod) {
+    constructor(idClinic, idDoctor, dayName, timePeriod, SNILS, patientName) {
         this.idClinic = idClinic;
         this.idDoctor = idDoctor;
         this.dayName = dayName;
         this.timePeriod = timePeriod;
+        this.SNILS = SNILS;
+        this.patientName = patientName;
     }
     idPatient = '';
 }
