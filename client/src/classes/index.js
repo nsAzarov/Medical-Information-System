@@ -58,7 +58,18 @@ class Patient {
     }
 }
 
+class Appointment {
+    constructor(idClinic, idDoctor, dayName, timePeriod) {
+        this.idClinic = idClinic;
+        this.idDoctor = idDoctor;
+        this.dayName = dayName;
+        this.timePeriod = timePeriod;
+    }
+    idPatient = '';
+}
+
 export {
+    Appointment,
     Clinic,
     HospitalRoom,
     Visit,

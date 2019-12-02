@@ -1,4 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react'
+import axios from 'axios';
 import styled from 'styled-components';
 
 import ClinicsSection from './ClinicsSection';
@@ -11,6 +12,7 @@ import {APIService} from '../Master/ApiService';
 import {Container} from '../Master/Container';
 import {ModalBackground, DeleteModal} from '../Master/Modal';
 import {useFormInput} from '../Master/functions';
+import {Appointment} from '../../classes';
 
 export const ChoiceTitle = styled.h3`
     margin: 20px;
@@ -124,7 +126,6 @@ export default function Main() {
 
     useEffect(() => {
         setWindowHeight(document.body.offsetHeight);
-        console.log(windowHeight)
     }, [document.body.offsetHeight])
 
     const deleteClinicFromDB = () => {
@@ -138,6 +139,15 @@ export default function Main() {
         localStorage.setItem('clinics', JSON.stringify(tempArr));
     }
     
+    const makeAppointmentWithDoctor = () => {
+        let appointment = new Appointment(selectedClinic._id, selectedDoctor._id, selectedVisitTime.dayName, selectedVisitTime.timePeriod);
+        
+        axios
+            .post("/MakeAppointment", {...appointment})
+            .then(response => {console.log(response)})
+            .catch(error => {console.log(error)})
+    }
+
     return (
         <Fragment>
             {deleteModalOpened ?
@@ -179,7 +189,7 @@ export default function Main() {
                     </div>
                 </div>
                 <div id='btn-area'>
-                    <button onClick={() => {setConfirmModalOpened(false)}}>Да</button>
+                    <button onClick={() => {makeAppointmentWithDoctor(); setConfirmModalOpened(false)}}>Да</button>
                     <button onClick={() => setConfirmModalOpened(false)}>Нет</button>
                 </div>
             </ConfirmModal>

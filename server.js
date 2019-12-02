@@ -23,6 +23,7 @@ const Clinic = require('./models/Clinic');
 
 app.post('/AddClinic', (req, res) => {
     if(!req.body) return res.sendStatus(400);
+
     var clinic = new Clinic(req.body);
     clinic._id = mongoose.Types.ObjectId();
     clinic.save((err, clinic) => {
@@ -83,6 +84,7 @@ const Doctor = require('./models/Doctor');
 
 app.post('/AddDoctor', (req, res) => {
     if(!req.body) return res.sendStatus(400);
+
     var doctor = new Doctor(req.body);
     doctor._id = mongoose.Types.ObjectId();
     doctor.save((err, doctor) => {
@@ -105,6 +107,19 @@ app.post('/SaveSchedule', (req, res) => {
                 console.log(success);
             }
     });
+})
+
+const Appointment = require('./models/Appointment');
+
+app.post('/MakeAppointment', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+    
+    var appointment = new Appointment(req.body);
+    appointment._id = mongoose.Types.ObjectId();
+    appointment.save((err, appointment) => {
+        if (err) return console.error(err);
+        console.log("Новая запись к врачу на " + appointment.dayName + appointment.timePeriod + " сохранена в коллекцию appointments.");
+    })
 })
 
 app.get('/Clinics', (req, res) => {
