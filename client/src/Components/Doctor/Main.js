@@ -5,9 +5,98 @@ import styled from 'styled-components';
 import {APIService} from '../Master/ApiService';
 import {Container} from '../Master/Container';
 import {InfoSection} from '../Master/InfoSection';
+import {ModalBackground} from '../Master/Modal';
 import {Doctor, Visit} from '../../classes';
 import {SaveChangesButton} from '../Master/SaveChangesButton';
 import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
+
+const AppointmentModal = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    height: 600px;
+    width: 480px;
+    background: white;
+    position: absolute;
+    left: 50%;
+    margin-left: -260px;
+    bottom: 0;
+    margin-bottom: -450px;
+    z-index: 100;
+    svg {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 25px;
+        width: 25px;
+        margin: 5px;
+    }
+    #top-area {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        img:first-child {
+            height: 150px;
+        }
+        img {
+            height: 220px;
+        }
+    }
+    #patient-info {
+        padding: 10px 0;
+        text-align: center;
+    }
+    #appointment-time {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 20px;
+    }
+    #btn-area {
+        display: flex;
+        margin-top: 5px;
+        button {
+            width: 60px;
+            background: beige;
+            border-radius: 3px;
+            &:last-child {
+                margin-left: 10px;
+            }
+        }
+    }
+`;
+
+const AppointmentBlock = styled.div`
+    height: 100px;
+    width: 198px;
+    background: beige;
+    border-radius: 8px;
+    margin: 0px 10px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+`;
+
+const Appointments = styled.div`
+    h3 {
+        width: 100%;
+        text-align: center;
+        margin: 20px;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+`;
+
+const AppointmentsSection = styled.section`
+    width: 100%;
+`;
 
 const ScheduleSection = styled.section`
     width: 100%;
@@ -28,6 +117,12 @@ const Photo = styled.img`
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
     const [appointmentsList, setAppointmentsList] = useState([]);
+    const [appointmentModalOpened, setAppointmentModalOpened] = useState(false);
+    const [windowHeight, setWindowHeight] = useState(document.body.offsetHeight);
+
+    useEffect(() => {
+        setWindowHeight(document.body.offsetHeight);
+    }, [appointmentModalOpened])
 
     useEffect(() => {
         const ApiService = new APIService();
@@ -37,7 +132,7 @@ export default function Main(props) {
                 setAppointmentsList(appointments);
                 //setLoading(false);
             });
-    }, [])
+    }, [doctorObj])
 
     const changeActivity = (idVisit) => {
         const tempObj = new Doctor(doctorObj.idDoctor, doctorObj.imgUrl, doctorObj.name, doctorObj.age, doctorObj.specialization, doctorObj.experience, doctorObj.schedule);
@@ -93,11 +188,25 @@ export default function Main(props) {
                 </Container>
             </ScheduleSection>
             <hr />
-            <Container>
-                {appointmentsList.map((el, i) => {
-                    console.log(el)
-                })}
-            </Container>
+            <AppointmentsSection>
+                <Container>
+                    <Appointments>
+                        <h3>Предстоящие записи</h3>
+                        {appointmentsList.map((el, i) => {
+                        return <AppointmentBlock key={i} onClick={() => setAppointmentModalOpened(true)}>
+                            {el.dayName}{el.timePeriod}<br />
+                            {el.patientName}
+                            </AppointmentBlock>
+                        })}
+                    </Appointments>
+                </Container>
+            </AppointmentsSection>
+            {appointmentModalOpened ? 
+            <>
+                <ModalBackground height={windowHeight}/>
+                <AppointmentModal></AppointmentModal>
+            </>
+            :null}
         </Fragment>
     )
 }

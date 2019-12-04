@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const ModalBackground = styled.div`
+    top: 0;
     position: absolute;
-    height: ${props => `${props.height}px` || '100%'};
+    height: ${props => props.height}px;
     width: 100%;
     background: whitesmoke;
     z-index: 50;

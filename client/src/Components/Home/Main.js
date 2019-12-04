@@ -86,13 +86,13 @@ const ConfirmModal = styled.div`
 `;
 
 export default function Main() {
-    const ApiService = new APIService();
     //const [clinics, setClinics] = useState(JSON.parse(localStorage.getItem('clinics')));
     //const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [clinics, setClinics] = useState([]);
     const [doctorsInDB, setDoctorsInDB] = useState([]);
 
     useEffect(() => {
+        const ApiService = new APIService();
         ApiService
             .getAllClinics()
             .then(clinics => {
@@ -102,6 +102,7 @@ export default function Main() {
     }, []);
 
     useEffect(() => {
+        const ApiService = new APIService();
         ApiService
             .getAllDoctors()
             .then(doctors => {
@@ -126,7 +127,7 @@ export default function Main() {
 
     useEffect(() => {
         setWindowHeight(document.body.offsetHeight);
-    }, [document.body.offsetHeight])
+    }, [confirmModalOpened])
 
     const deleteClinicFromDB = () => {
         let tempArr = [];
