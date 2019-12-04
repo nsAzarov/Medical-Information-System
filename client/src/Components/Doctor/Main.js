@@ -1,7 +1,8 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import {APIService} from '../Master/ApiService';
 import {Container} from '../Master/Container';
 import {InfoSection} from '../Master/InfoSection';
 import {Doctor, Visit} from '../../classes';
@@ -26,6 +27,17 @@ const Photo = styled.img`
 
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
+    const [appointmentsList, setAppointmentsList] = useState([]);
+
+    useEffect(() => {
+        const ApiService = new APIService();
+        ApiService
+            .getAppointmentsList(doctorObj._id)
+            .then(appointments => {
+                setAppointmentsList(appointments);
+                //setLoading(false);
+            });
+    }, [])
 
     const changeActivity = (idVisit) => {
         const tempObj = new Doctor(doctorObj.idDoctor, doctorObj.imgUrl, doctorObj.name, doctorObj.age, doctorObj.specialization, doctorObj.experience, doctorObj.schedule);
@@ -77,11 +89,14 @@ export default function Main(props) {
                             </DayBlock>
                         })}
                     </Schedule>
+                    <SaveChangesButton onClick={() => SaveChanges()}>Сохранить изменения</SaveChangesButton>
                 </Container>
             </ScheduleSection>
             <hr />
             <Container>
-                <SaveChangesButton onClick={() => SaveChanges()}>Сохранить изменения</SaveChangesButton>
+                {appointmentsList.map((el, i) => {
+                    console.log(el)
+                })}
             </Container>
         </Fragment>
     )

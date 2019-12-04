@@ -19,28 +19,8 @@ export class APIService {
         const Doctors = await this.getResource(`/Doctor/${idDoctor}`);
         return Doctors;
     }
-    async getTimeDiscountBooks() {
-        const Books = await this.getResource(`/TimeDiscount`);
-        return Books;
-    }
-    async getBestsellers() {
-        const Books = await this.getResource(`/Bestsellers`);
-        return Books;
-    }
-    async getTopRated() {
-        const Books = await this.getResource(`/TopRated`);
-        return Books;
-    }
-    async getOneProduct(id) {
-        const product = await this.getResource(`/Product/${id}`);
-        return product;
-    }
-    async getAllReviews() {
-        const reviews = await this.getResource(`/Reviews`);
-        return reviews;
-    }
-    async getAllBanners() {
-        const banners = await this.getResource(`/Banners`);
-        return banners;
+    async getAppointmentsList(idDoctor) {
+        const Appointments = await this.getResource(`/GetAppointmentsList/${idDoctor}`);
+        return Appointments;
     }
 }

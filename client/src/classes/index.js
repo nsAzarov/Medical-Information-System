@@ -78,5 +78,3 @@ export {
     Doctor,
     Patient
 }
-//const clinic = new Clinic('qwerty');
-//clinic.info();

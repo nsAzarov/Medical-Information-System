@@ -122,6 +122,13 @@ app.post('/MakeAppointment', (req, res) => {
     })
 })
 
+app.get('/GetAppointmentsList/:id', (req, res) => {
+    let ID = new mongoose.Types.ObjectId(req.params.id);
+    Appointment.find({idDoctor: ID})
+        .then(appointments => res.json(appointments))
+        .catch(err => console.log(err));
+})
+
 app.get('/Clinics', (req, res) => {
     Clinic.find({})
         .then(clinics => res.json(clinics))
