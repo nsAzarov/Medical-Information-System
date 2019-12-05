@@ -5,66 +5,13 @@ import styled from 'styled-components';
 import {APIService} from '../Master/ApiService';
 import {Container} from '../Master/Container';
 import {InfoSection} from '../Master/InfoSection';
-import {ModalBackground} from '../Master/Modal';
 import {Doctor, Visit} from '../../classes';
+import Examination from './Examination';
 import {SaveChangesButton} from '../Master/SaveChangesButton';
 import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
 
-const AppointmentModal = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 20px;
-    height: 600px;
-    width: 480px;
-    background: white;
-    position: absolute;
-    left: 50%;
-    margin-left: -260px;
-    bottom: 0;
-    margin-bottom: -450px;
-    z-index: 100;
-    svg {
-        cursor: pointer;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 25px;
-        width: 25px;
-        margin: 5px;
-    }
-    #top-area {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        img:first-child {
-            height: 150px;
-        }
-        img {
-            height: 220px;
-        }
-    }
-    #patient-info {
-        padding: 10px 0;
-        text-align: center;
-    }
-    #appointment-time {
-        padding: 10px 0;
-        text-align: center;
-        font-size: 20px;
-    }
-    #btn-area {
-        display: flex;
-        margin-top: 5px;
-        button {
-            width: 60px;
-            background: beige;
-            border-radius: 3px;
-            &:last-child {
-                margin-left: 10px;
-            }
-        }
-    }
+const ExaminationSection = styled.section`
+    width: 100%;
 `;
 
 const AppointmentBlock = styled.div`
@@ -91,7 +38,7 @@ const Appointments = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 `;
 
 const AppointmentsSection = styled.section`
@@ -117,12 +64,7 @@ const Photo = styled.img`
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
     const [appointmentsList, setAppointmentsList] = useState([]);
-    const [appointmentModalOpened, setAppointmentModalOpened] = useState(false);
-    const [windowHeight, setWindowHeight] = useState(document.body.offsetHeight);
-
-    useEffect(() => {
-        setWindowHeight(document.body.offsetHeight);
-    }, [appointmentModalOpened])
+    const [selectedAppointment, setSelectedAppointment] = useState('');
 
     useEffect(() => {
         const ApiService = new APIService();
@@ -172,6 +114,30 @@ export default function Main(props) {
                 </Container>
             </InfoSection>
             <hr />
+            <AppointmentsSection>
+                <Container>
+                    <Appointments>
+                        <h3>Предстоящие записи</h3>
+                        {appointmentsList.map((obj, i) => {
+                        return <AppointmentBlock key={i} onClick={() => setSelectedAppointment(obj)}>
+                            {obj.dayName}{obj.timePeriod}<br />
+                            {obj.patientName}
+                            </AppointmentBlock>
+                        })}
+                    </Appointments>
+                </Container>
+            </AppointmentsSection>
+            <hr />
+            {selectedAppointment ? 
+            <>
+                <ExaminationSection>
+                    <Container>
+                        <Examination />
+                    </Container>
+                </ExaminationSection>
+                <hr />
+            </>
+            :null}
             <ScheduleSection>
                 <Container>
                     <Schedule>
@@ -187,26 +153,6 @@ export default function Main(props) {
                     <SaveChangesButton onClick={() => SaveChanges()}>Сохранить изменения</SaveChangesButton>
                 </Container>
             </ScheduleSection>
-            <hr />
-            <AppointmentsSection>
-                <Container>
-                    <Appointments>
-                        <h3>Предстоящие записи</h3>
-                        {appointmentsList.map((el, i) => {
-                        return <AppointmentBlock key={i} onClick={() => setAppointmentModalOpened(true)}>
-                            {el.dayName}{el.timePeriod}<br />
-                            {el.patientName}
-                            </AppointmentBlock>
-                        })}
-                    </Appointments>
-                </Container>
-            </AppointmentsSection>
-            {appointmentModalOpened ? 
-            <>
-                <ModalBackground height={windowHeight}/>
-                <AppointmentModal></AppointmentModal>
-            </>
-            :null}
         </Fragment>
     )
 }

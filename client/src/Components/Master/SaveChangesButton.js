@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SaveChangesButton = styled.button`
     padding: 8px 14px;
-    margin: 20px auto;
+    margin: 20px auto 50px;
     border: 1px solid beige;
     border-radius: 3px;
     background: beige;
