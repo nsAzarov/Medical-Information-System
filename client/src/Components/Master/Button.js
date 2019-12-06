@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const SaveChangesButton = styled.button`
+export const Button = styled.button`
     padding: 8px 14px;
-    margin: 20px auto 50px;
+    margin: 20px auto;
     border: 1px solid beige;
     border-radius: 3px;
     background: beige;

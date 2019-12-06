@@ -8,7 +8,7 @@ import {Container} from '../Master/Container';
 import {InfoSection} from '../Master/InfoSection';
 import {Clinic} from '../../classes';
 import {ModalBackground, DeleteModal} from '../Master/Modal.js';
-import {SaveChangesButton} from '../Master/SaveChangesButton';
+import {Button} from '../Master/Button';
 import {useFormInput} from '../Master/functions';
 
 const Logo = styled.img`
@@ -334,7 +334,7 @@ export default function Main(props) {
             <RoomsSection clinicState={[clinicObj, setClinicObj]} clinicObj={clinicObj}/>
             <hr />
             <Container>
-                <SaveChangesButton onClick={() => SaveChanges()}>Сохранить изменения</SaveChangesButton>
+                <Button onClick={() => SaveChanges()}>Сохранить изменения</Button>
             </Container>
         </Fragment>
     )

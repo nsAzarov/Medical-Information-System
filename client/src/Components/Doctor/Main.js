@@ -7,7 +7,7 @@ import {Container} from '../Master/Container';
 import {InfoSection} from '../Master/InfoSection';
 import {Doctor, Visit} from '../../classes';
 import Examination from './Examination';
-import {SaveChangesButton} from '../Master/SaveChangesButton';
+import {Button} from '../Master/Button';
 import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
 
 const ExaminationSection = styled.section`
@@ -150,7 +150,7 @@ export default function Main(props) {
                             </DayBlock>
                         })}
                     </Schedule>
-                    <SaveChangesButton onClick={() => SaveChanges()}>Сохранить изменения</SaveChangesButton>
+                    <Button onClick={() => SaveChanges()} style={{marginBottom: '50px'}}>Сохранить изменения</Button>
                 </Container>
             </ScheduleSection>
         </Fragment>

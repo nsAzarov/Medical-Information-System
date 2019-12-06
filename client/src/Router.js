@@ -5,6 +5,7 @@ import AddClinic from './Components/AddClinic';
 import AddDoctor from './Components/AddDoctor';
 import Clinic from './Components/Clinic';
 import Doctor from './Components/Doctor';
+import Profile from './Components/Profile';
 import Home from './Components/Home';
 import ScrollToTop from './Components/Master/ScrollToTop';
 
@@ -17,6 +18,7 @@ const Router = () => {
                 <Route path="/Clinic/:id" component={Clinic} />
                 <Route path="/AddDoctor" component={AddDoctor} />
                 <Route path="/Doctor/:id" component={Doctor} />
+                <Route path="/Profile" component={Profile} />
             </ScrollToTop>
         </BrowserRouter>
     )
