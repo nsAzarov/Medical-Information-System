@@ -75,7 +75,6 @@ export default function AppointmentSection(props) {
 
     const confirmData = () => {
         window.scrollTo(0, 0);
-        props.setConfirmModalOpened(true);
     }
 
     return (

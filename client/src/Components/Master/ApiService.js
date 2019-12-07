@@ -23,4 +23,8 @@ export class APIService {
         const Appointments = await this.getResource(`/GetAppointmentsList/${idDoctor}`);
         return Appointments;
     }
+    async getPatient(SNILS) {
+        const Patient = await this.getResource(`/Patient/${SNILS}`);
+        return Patient;
+    }
 }

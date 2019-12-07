@@ -1,7 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import {Button} from '../Master/Button';
+import {Patient} from '../../classes';
 import {useFormInput} from '../Master/functions';
 
 const Input = styled.div`
@@ -20,7 +22,7 @@ const Input = styled.div`
 const Form = styled.form`
     h2 {
         text-align: center;
-        margin-bottom: 35px;
+        margin-bottom: 20px;
     }
     display: flex;
     flex-direction: column;
@@ -32,7 +34,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 480px;
+    height: 530px;
     width: 400px;
     border: 1px solid grey;
     border-radius: 20px;
@@ -42,10 +44,25 @@ const Wrapper = styled.div`
 export default function SignUpArea() {
     const imgUrl = useFormInput('');
     const name = useFormInput('');
+    const gender = useFormInput('');
+    const age = useFormInput('');
     const SNILS = useFormInput('');
     const availabilityOfInsurance = useFormInput('');
     const password = useFormInput('');
     const passwordConfirm = useFormInput('');
+    
+    const RegisterNewPatient = () => {
+        const newPatient = new Patient(imgUrl.value, name.value, age.value, gender.value, SNILS.value)
+        axios
+            .post('/RegisterNewPatient', {...newPatient})
+            .then(response => {
+                if (response.statusText === 'OK') {
+                    window.location.reload(); 
+                }
+            })
+            .catch(error => {console.log(error)})
+    }
+
     return (
         <Wrapper>
             <Form>
@@ -57,6 +74,14 @@ export default function SignUpArea() {
                 <Input>
                     <h4>Фамилия Имя</h4>
                     <input {...name}/>
+                </Input>
+                <Input>
+                    <h4>Пол</h4>
+                    <input {...gender}/>
+                </Input>
+                <Input>
+                    <h4>Возраст</h4>
+                    <input {...age}/>
                 </Input>
                 <Input>
                     <h4>СНИЛС</h4>
@@ -74,7 +99,7 @@ export default function SignUpArea() {
                     <h4>Повторите пароль</h4>
                     <input {...passwordConfirm}/>
                 </Input>
-                <Button>Зарегистрироваться</Button>
+                <Button onClick={(e) => {e.preventDefault(); RegisterNewPatient()}}>Зарегистрироваться</Button>
             </Form>
         </Wrapper>
     )

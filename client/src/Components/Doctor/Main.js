@@ -119,7 +119,7 @@ export default function Main(props) {
                     <Appointments>
                         <h3>Предстоящие записи</h3>
                         {appointmentsList.map((obj, i) => {
-                        return <AppointmentBlock key={i} onClick={() => setSelectedAppointment(obj)}>
+                        return <AppointmentBlock key={i} onClick={() => {setSelectedAppointment(obj)}}>
                             {obj.dayName}{obj.timePeriod}<br />
                             {obj.patientName}
                             </AppointmentBlock>
@@ -132,7 +132,7 @@ export default function Main(props) {
             <>
                 <ExaminationSection>
                     <Container>
-                        <Examination />
+                        <Examination selectedAppointment={selectedAppointment} />
                     </Container>
                 </ExaminationSection>
                 <hr />

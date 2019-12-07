@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import {APIService} from '../Master/ApiService';
 
 const ReferralToAdditionalExamination = styled.div``;
 
@@ -15,7 +16,18 @@ const ExaminationWrap = styled.div`
     height: 700px;
 `;
 
-export default function Examination() {
+export default function Examination(props) {
+    const [patientObj, setPatientObj] = useState({});
+    
+    useEffect(() => {
+        const ApiService = new APIService();
+        ApiService
+            .getPatient(props.selectedAppointment.SNILS)
+            .then(patient => {
+                setPatientObj(patient);
+                //setLoading(false);
+            });
+    }, [props.selectedAppointment])
     //в инфе о пациенте нужно отображать фото, имя, снилс, наличие страховки, ссылку на персональную страницу
     //создать коллекцию пациентов и схему пациента 
     //по выбору аппоинтмента делать гет запрос и получать пациента 

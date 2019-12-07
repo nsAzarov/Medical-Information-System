@@ -20,7 +20,7 @@ const Input = styled.div`
 const Form = styled.form`
     h2 {
         text-align: center;
-        margin-bottom: 35px;
+        margin-bottom: 40px;
     }
     display: flex;
     flex-direction: column;
@@ -32,7 +32,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 480px;
+    height: 530px;
     width: 400px;
     border: 1px solid grey;
     border-radius: 20px;

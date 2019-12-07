@@ -122,6 +122,21 @@ app.post('/MakeAppointment', (req, res) => {
     })
 })
 
+const Patient = require('./models/Patient');
+
+app.post('/RegisterNewPatient', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+    
+    var patient = new Patient(req.body);
+    patient._id = mongoose.Types.ObjectId();
+    patient.medicalHistory = [];
+    patient.save((err, patient) => {
+        if (err) return console.error(err);
+        console.log("Пациент " + patient.name + " сохранён в коллекцию patients.");
+    })
+    res.send("Пациент зарегистрирован.")
+})
+
 app.get('/GetAppointmentsList/:id', (req, res) => {
     let ID = new mongoose.Types.ObjectId(req.params.id);
     Appointment.find({idDoctor: ID})
@@ -152,6 +167,12 @@ app.get('/Doctor/:id', (req, res) => {
     let ObjID = new mongoose.Types.ObjectId(req.params.id);
     Doctor.find({ _id: ObjID })
         .then(doctor => res.json(doctor))
+        .catch(err => console.log(err));
+})
+
+app.get('/Patient/:id', (req, res) => {
+    Patient.find({ SNILS: req.params.id })
+        .then(patient => res.json(patient))
         .catch(err => console.log(err));
 })
 
