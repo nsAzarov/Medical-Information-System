@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import {APIService} from '../Master/ApiService';
+import {MedicalExamination} from '../../classes';
 import {useFormInput} from '../Master/functions';
 import { Button } from '../Master/Button';
 
@@ -99,6 +101,15 @@ export default function Examination(props) {
                 //setLoading(false);
             });
     }, [props.selectedAppointment])
+
+    const createNewExaminationResults = () => {
+        const newExamination = new MedicalExamination(symptoms.value, inspectionResults.value, diagnosis.value, medicines.value, recommendations.value, referralToAdditionalExamination.value)
+        const idPatient = patientObj._id;
+        axios
+            .post('/CreateNewExaminationResults', {idPatient, newExamination})
+            .then(response => {console.log(response)})
+            .catch(error => {console.log(error)})
+    }
     //в инфе о пациенте нужно отображать фото, имя, снилс, наличие страховки, ссылку на персональную страницу
     //в анамнезе следующие текстареа
     //симптомы пациента
@@ -157,7 +168,7 @@ export default function Examination(props) {
                 <h2>Направления на доп. обследования:</h2>
                 <textarea {...referralToAdditionalExamination}></textarea>
             </ReferralToAdditionalExamination>
-            <Button>Готово</Button>
+            <Button onClick={() => createNewExaminationResults()}>Готово</Button>
         </ExaminationWrap>
     )
 }

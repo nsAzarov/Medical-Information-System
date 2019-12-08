@@ -27,10 +27,15 @@ const PatientSchema = new Schema({
         type: String,
         required: true
     },
-    medicalHistory: {
-        type: Array,
-        required: true
-    }
+    medicalHistory: [{
+        date: {type: String},
+        symptomes: {type: String},
+        inspectionResults: {type: String},
+        diagnosis: {type: String},
+        medicines: {type: String},
+        recommendations: {type: String},
+        referralToAdditionalExamination: {type: String}
+    }]
 }, {collection: 'Patients'});
 
 module.exports = Patient = mongoose.model('Patient', PatientSchema);

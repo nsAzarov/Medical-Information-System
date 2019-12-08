@@ -72,10 +72,23 @@ class Appointment {
     idPatient = '';
 }
 
+class MedicalExamination {
+    constructor(symptoms, inspectionResults, diagnosis, medicines, recommendations, referralToAdditionalExamination) {
+        this.date = new Date();
+        this.symptoms = symptoms;
+        this.inspectionResults = inspectionResults;
+        this.diagnosis = diagnosis;
+        this.medicines = medicines;
+        this.recommendations = recommendations;
+        this.referralToAdditionalExamination = referralToAdditionalExamination;
+    }
+}
+
 export {
     Appointment,
     Clinic,
     HospitalRoom,
+    MedicalExamination,
     Visit,
     Doctor,
     Patient

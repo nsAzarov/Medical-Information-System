@@ -137,6 +137,23 @@ app.post('/RegisterNewPatient', (req, res) => {
     res.send("Пациент зарегистрирован.")
 })
 
+app.post('/CreateNewExaminationResults', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+
+    console.log(req.body)
+    Patient.findOneAndUpdate(
+        {_id: req.body.idPatient}, 
+        {$push: {medicalHistory: req.body.newExamination}}, 
+        {new: true}, 
+        (error, success) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+    });
+})
+
 app.get('/GetAppointmentsList/:id', (req, res) => {
     let ID = new mongoose.Types.ObjectId(req.params.id);
     Appointment.find({idDoctor: ID})
