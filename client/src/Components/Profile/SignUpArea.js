@@ -52,7 +52,7 @@ export default function SignUpArea() {
     const passwordConfirm = useFormInput('');
     
     const RegisterNewPatient = () => {
-        const newPatient = new Patient(imgUrl.value, name.value, age.value, gender.value, SNILS.value)
+        const newPatient = new Patient(imgUrl.value, name.value, age.value, gender.value, SNILS.value, availabilityOfInsurance.value)
         axios
             .post('/RegisterNewPatient', {...newPatient})
             .then(response => {

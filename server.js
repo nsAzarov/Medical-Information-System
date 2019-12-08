@@ -158,20 +158,20 @@ app.get('/Doctors', (req, res) => {
 
 app.get('/Clinic/:id', (req, res) => {
     let ObjID = new mongoose.Types.ObjectId(req.params.id);
-    Clinic.find({ _id: ObjID })
+    Clinic.findOne({ _id: ObjID })
         .then(clinic => res.json(clinic))
         .catch(err => console.log(err));
 })
 
 app.get('/Doctor/:id', (req, res) => {
     let ObjID = new mongoose.Types.ObjectId(req.params.id);
-    Doctor.find({ _id: ObjID })
+    Doctor.findOne({ _id: ObjID })
         .then(doctor => res.json(doctor))
         .catch(err => console.log(err));
 })
 
 app.get('/Patient/:id', (req, res) => {
-    Patient.find({ SNILS: req.params.id })
+    Patient.findOne({ SNILS: req.params.id })
         .then(patient => res.json(patient))
         .catch(err => console.log(err));
 })

@@ -49,12 +49,13 @@ class Doctor {
 }
 
 class Patient {
-    constructor(imgUrl, name, age, gender, SNILS) {
+    constructor(imgUrl, name, age, gender, SNILS, availabilityOfInsurance) {
         this.imgUrl = imgUrl;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.SNILS = SNILS;
+        this.availabilityOfInsurance = availabilityOfInsurance;
     }
     medicalHistory = [];
 }

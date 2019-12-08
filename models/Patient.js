@@ -23,6 +23,10 @@ const PatientSchema = new Schema({
         type: String,
         required: true
     },
+    availabilityOfInsurance: {
+        type: String,
+        required: true
+    },
     medicalHistory: {
         type: Array,
         required: true
