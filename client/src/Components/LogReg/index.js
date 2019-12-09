@@ -4,7 +4,7 @@ import Header from '../Master/Header';
 import Main  from './Main';
 import Footer from '../Master/Footer';
 
-export default function Home() {
+export default function LogReg() {
     return (
         <Fragment>
             <Header />
