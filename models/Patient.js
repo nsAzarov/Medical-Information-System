@@ -29,7 +29,7 @@ const PatientSchema = new Schema({
     },
     medicalHistory: [{
         date: {type: String},
-        symptomes: {type: String},
+        symptoms: {type: String},
         inspectionResults: {type: String},
         diagnosis: {type: String},
         medicines: {type: String},

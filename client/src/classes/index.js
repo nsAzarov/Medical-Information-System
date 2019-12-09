@@ -74,7 +74,7 @@ class Appointment {
 
 class MedicalExamination {
     constructor(symptoms, inspectionResults, diagnosis, medicines, recommendations, referralToAdditionalExamination) {
-        this.date = new Date();
+        this.date = (new Date()).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
         this.symptoms = symptoms;
         this.inspectionResults = inspectionResults;
         this.diagnosis = diagnosis;

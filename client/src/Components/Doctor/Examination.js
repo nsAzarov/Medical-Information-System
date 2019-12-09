@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import {APIService} from '../Master/ApiService';
+import {PatientInfo} from '../Master/PatientInfo';
 import {MedicalExamination} from '../../classes';
 import {useFormInput} from '../Master/functions';
-import { Button } from '../Master/Button';
+import {Button} from '../Master/Button';
 
 const ReferralToAdditionalExamination = styled.div`
     h2 {
@@ -58,25 +59,6 @@ const Anamnesis = styled.div`
     }
 `;
 
-const PatientInfo = styled.div`
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid grey;
-    img {
-        height: 300px;
-    }
-    table {
-        tr {
-            td {
-                padding: 3px 7px;
-            }
-            td:nth-last-child(2) {
-                font-weight: bold;
-            }
-        }
-    }
-`;
-
 const ExaminationWrap = styled.div`
     display: flex;
     flex-direction: column;
@@ -124,28 +106,30 @@ export default function Examination(props) {
                 <>
                     <img src={patientObj.imgUrl} alt="" />
                     <table>
-                        <tr>
-                            <td>Имя:</td>
-                            <td>{patientObj.name}</td>
-                        </tr>
-                        <tr>
-                            <td>Возраст:</td>
-                            <td>{patientObj.age}</td>
-                        </tr>
-                        <tr>
-                            <td>Пол:</td>
-                            <td>{patientObj.gender}</td>
-                        </tr>
-                        <tr>
-                            <td>СНИЛС:</td>
-                            <td>{patientObj.SNILS}</td>
-                        </tr>
-                        <tr>
-                            <td>Наличие страховки:</td>
-                            <td>{patientObj.availabilityOfInsurance}</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>Имя:</td>
+                                <td>{patientObj.name}</td>
+                            </tr>
+                            <tr>
+                                <td>Возраст:</td>
+                                <td>{patientObj.age}</td>
+                            </tr>
+                            <tr>
+                                <td>Пол:</td>
+                                <td>{patientObj.gender}</td>
+                            </tr>
+                            <tr>
+                                <td>СНИЛС:</td>
+                                <td>{patientObj.SNILS}</td>
+                            </tr>
+                            <tr>
+                                <td>Наличие страховки:</td>
+                                <td>{patientObj.availabilityOfInsurance}</td>
+                            </tr>
+                        </tbody>
                     </table>
-                </> 
+                </>
                 : null}
             </PatientInfo>
             <Anamnesis>

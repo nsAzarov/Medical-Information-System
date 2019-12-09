@@ -6,6 +6,7 @@ import AddDoctor from './Components/AddDoctor';
 import Clinic from './Components/Clinic';
 import Doctor from './Components/Doctor';
 import LogReg from './Components/LogReg';
+import Patient from './Components/Patient';
 import Home from './Components/Home';
 import ScrollToTop from './Components/Master/ScrollToTop';
 
@@ -19,6 +20,7 @@ const Router = () => {
                 <Route path="/AddDoctor" component={AddDoctor} />
                 <Route path="/Doctor/:id" component={Doctor} />
                 <Route path="/LogReg" component={LogReg} />
+                <Route path="/Patient/:id" component={Patient} />
             </ScrollToTop>
         </BrowserRouter>
     )

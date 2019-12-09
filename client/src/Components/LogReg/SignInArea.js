@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Redirect} from 'react-router';
 import styled from 'styled-components';
 
 import {Button} from '../Master/Button';
@@ -42,6 +43,12 @@ const Wrapper = styled.div`
 export default function SignInArea() {
     const SNILS = useFormInput('');
     const password = useFormInput('');
+    const [loginSuccessful, setLoginSuccessful] = useState(false);
+
+    const tryToEnterPersonalAccount = () => {
+        setLoginSuccessful(true);
+    }
+
     return (
         <Wrapper>
             <Form>
@@ -54,7 +61,13 @@ export default function SignInArea() {
                     <h4>Пароль</h4>
                     <input {...password}/>
                 </Input>
-                <Button>Вход</Button>
+                <Button onClick={() => tryToEnterPersonalAccount()}>Вход</Button>
+                {loginSuccessful ? 
+                    <Redirect to={{
+                        pathname: `/Patient/${SNILS.value}`,
+                        state: {SNILS: SNILS.value}
+                    }}/>
+                :null}
             </Form>
         </Wrapper>
     )
