@@ -43,6 +43,7 @@ export default function ClinicsSection(props) {
     return (
         <Section>
             <Container>
+                <h2 style={{marginTop: '20px'}}>Запись на приём к врачу</h2>
                 <ChoiceTitle>Выберите клинику</ChoiceTitle>
                 <Blocks>
                     {props.clinics.map((element, i) => {

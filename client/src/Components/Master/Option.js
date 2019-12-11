@@ -13,6 +13,7 @@ export const Option = styled.div`
         width: 168px;
         left: 0;
     }
+    cursor: pointer;
     position: relative;
     display: flex;
     justify-content: center;

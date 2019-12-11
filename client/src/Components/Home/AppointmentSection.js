@@ -87,7 +87,7 @@ export default function AppointmentSection(props) {
                     <input {...props.SNILS}/>
                     <h4>Фамилия Имя</h4>
                     <input {...props.LnameFname}/>
-                    <button onClick={e => {e.preventDefault(); confirmData()}}>Записаться</button>
+                    <button onClick={e => {e.preventDefault(); props.setConfirmModalOpened(true); confirmData()}}>Записаться</button>
                 </AppointmentForm>
             </Container>
         </Section>

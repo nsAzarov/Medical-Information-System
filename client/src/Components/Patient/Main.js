@@ -94,9 +94,9 @@ export default function Main(props) {
                         </tbody>
                     </table>
                 </PatientInfo>
+                <h4 style={{marginTop: '10px'}}>Медицинская история</h4>
                 <MedicalHistory>
                     {patientObj.medicalHistory.map((examResults, i) => {
-                        console.log(examResults)
                         return <ExamResults key={i} onClick={() => setSelectedExamResults(examResults)}>
                             {examResults.date}<br />
                             {examResults.diagnosis}

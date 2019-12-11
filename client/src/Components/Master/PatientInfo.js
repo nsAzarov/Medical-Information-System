@@ -12,6 +12,7 @@ export const PatientInfo = styled.div`
         tr {
             td {
                 padding: 3px 7px;
+                border-bottom: 1px solid whitesmoke;
             }
             td:nth-last-child(2) {
                 font-weight: bold;
