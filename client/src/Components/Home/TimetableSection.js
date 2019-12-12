@@ -18,7 +18,7 @@ export default function TimetableSection(props) {
                             {element.visits.map((el, i) => {
                                 if (el.active) {
                                     return <ScheduleBlock key={i} active={el.active} onClick={() => {props.setSelectedVisitTime(el); Scroll()}}>{el.dayName}{el.timePeriod}</ScheduleBlock>    
-                                }
+                                } else {return null}
                             })}
                         </DayBlock>
                     })}

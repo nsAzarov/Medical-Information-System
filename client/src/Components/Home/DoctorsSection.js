@@ -22,6 +22,7 @@ export default function DoctorsSection(props) {
                                 </Option>
                             }
                         }
+                        return null
                     })}
                 </Blocks>
             </Container>

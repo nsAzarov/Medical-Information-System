@@ -19,7 +19,6 @@ hr {
 }
 
 ::-webkit-scrollbar-button { 
-	background-image:url(''); 
 	background-repeat:no-repeat; 
 	width:6px; 
 	height:0px 
@@ -41,7 +40,6 @@ hr {
 } 
 
 ::-webkit-resizer{ 
-	background-image:url(''); 
 	background-repeat:no-repeat; 
 	width:7px; 
 	height:0px 
