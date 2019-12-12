@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+
+import Spinner from '../Master/Spinner';
 import {APIService} from '../Master/ApiService';
 import {PatientInfo} from '../Master/PatientInfo';
 import {MedicalExamination} from '../../classes';
@@ -80,7 +82,6 @@ export default function Examination(props) {
             .getPatient(props.selectedAppointment.SNILS)
             .then(patient => {
                 setPatientObj(patient);
-                //setLoading(false);
             });
     }, [props.selectedAppointment])
 
@@ -92,13 +93,7 @@ export default function Examination(props) {
             .then(response => {console.log(response)})
             .catch(error => {console.log(error)})
     }
-    //в инфе о пациенте нужно отображать фото, имя, снилс, наличие страховки, ссылку на персональную страницу
-    //в анамнезе следующие текстареа
-    //симптомы пациента
-    //результаты осмотра
-    //диагноз: предварительный и основной
-    //лечение: лекарства и рекомендации
-    //направление на дополнительные обследования (анализы, узи и прочее)
+
     return (
         <ExaminationWrap>
             <PatientInfo>
@@ -130,7 +125,7 @@ export default function Examination(props) {
                         </tbody>
                     </table>
                 </>
-                : null}
+                : <Spinner />}
             </PatientInfo>
             <Anamnesis>
                 <h2>Симптомы пациента:</h2>

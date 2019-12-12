@@ -9,6 +9,7 @@ import {Doctor, Visit} from '../../classes';
 import Examination from './Examination';
 import {Button} from '../Master/Button';
 import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
+import Spinner from '../Master/Spinner';
 
 const ExaminationSection = styled.section`
     width: 100%;
@@ -64,6 +65,7 @@ const Photo = styled.img`
 export default function Main(props) {
     const [doctorObj, setDoctorObj] = useState(JSON.parse(props.doctorObj));
     const [appointmentsList, setAppointmentsList] = useState([]);
+    const [appointmentsLoading, setAppointmentsLoading] = useState(true);
     const [selectedAppointment, setSelectedAppointment] = useState('');
 
     useEffect(() => {
@@ -72,7 +74,7 @@ export default function Main(props) {
             .getAppointmentsList(doctorObj._id)
             .then(appointments => {
                 setAppointmentsList(appointments);
-                //setLoading(false);
+                setAppointmentsLoading(false);
             });
     }, [doctorObj])
 
@@ -116,15 +118,25 @@ export default function Main(props) {
             <hr />
             <AppointmentsSection>
                 <Container>
-                    <Appointments>
-                        <h3>Предстоящие записи</h3>
-                        {appointmentsList.map((obj, i) => {
-                        return <AppointmentBlock key={i} onClick={() => {setSelectedAppointment(obj)}}>
-                            {obj.dayName}{obj.timePeriod}<br />
-                            {obj.patientName}
-                            </AppointmentBlock>
-                        })}
-                    </Appointments>
+                    {appointmentsLoading ?
+                        <Spinner />
+                    :
+                        <Appointments>
+                            <h3>Предстоящие записи</h3>
+                            {appointmentsList.length === 0 ? 
+                                <h5 style={{fontStyle: 'italic'}}>На данный момент нет ни одной записи</h5>
+                            :
+                            <>
+                                {appointmentsList.map((obj, i) => {
+                                return <AppointmentBlock key={i} onClick={() => {setSelectedAppointment(obj)}}>
+                                    {obj.dayName}{obj.timePeriod}<br />
+                                    {obj.patientName}
+                                    </AppointmentBlock>
+                                })}
+                            </>
+                            }
+                        </Appointments>
+                    }
                 </Container>
             </AppointmentsSection>
             <hr />

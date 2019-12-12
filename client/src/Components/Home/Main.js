@@ -88,6 +88,8 @@ const ConfirmModal = styled.div`
 export default function Main() {
     const [clinics, setClinics] = useState([]);
     const [doctorsInDB, setDoctorsInDB] = useState([]);
+    const [clinicsLoading, setClinicsLoading] = useState(true);
+    const [doctorsLoading, setDoctorsLoading] = useState(true);
 
     useEffect(() => {
         const ApiService = new APIService();
@@ -95,7 +97,7 @@ export default function Main() {
             .getAllClinics()
             .then(clinics => {
                 setClinics(clinics);
-                //setLoading(false);
+                setClinicsLoading(false);
             });
     }, []);
 
@@ -105,7 +107,7 @@ export default function Main() {
             .getAllDoctors()
             .then(doctors => {
                 setDoctorsInDB(doctors);
-                //setLoading(false);
+                setDoctorsLoading(false);
             });
     }, []);
 
@@ -196,7 +198,7 @@ export default function Main() {
             </ConfirmModal>
             </>
             :null}
-            <ClinicsSection clinics={clinics} doctorsInDB={doctorsInDB} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
+            <ClinicsSection clinics={clinics} clinicsLoading={clinicsLoading} doctorsInDB={doctorsInDB} doctorsLoading={doctorsLoading} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
             {selectedClinic ?
                 <>
                 <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>

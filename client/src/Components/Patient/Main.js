@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
+import Spinner from '../Master/Spinner';
 import {APIService} from '../Master/ApiService';
 import {PatientInfo} from '../Master/PatientInfo';
 import {Container} from '../Master/Container';
@@ -58,7 +59,6 @@ export default function Main(props) {
             .getPatient(props.SNILS)
             .then(patient => {
                 setPatientObj(patient);
-                //setLoading(false);
             });
     }, [props.SNILS])
 
@@ -114,7 +114,7 @@ export default function Main(props) {
                     </SelectedExamResults>
                 :null}
             </>
-            :null}
+            :<Spinner />}
             </Container>
         </PatientInfoSection>
     )

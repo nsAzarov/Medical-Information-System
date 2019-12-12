@@ -46,7 +46,7 @@ export default function ClinicsSection(props) {
             <Container>
                 <h2 style={{marginTop: '20px'}}>Запись на приём к врачу</h2>
                 <ChoiceTitle>Выберите клинику</ChoiceTitle>
-                {!props.clinics.length ?
+                {props.clinicsLoading && props.doctorsLoading ?
                     <Spinner />
                 :
                     <Blocks>

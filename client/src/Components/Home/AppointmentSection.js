@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import {ChoiceTitle, Section} from './Main';
 import {Container} from '../Master/Container';
-import {useFormInput} from '../Master/functions';
 
 const AppointmentForm = styled.form`
     display: flex;
