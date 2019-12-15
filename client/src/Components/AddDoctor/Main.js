@@ -4,9 +4,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 
-import {Container} from '../Master/Container';
+import {Container} from '../Other/Container';
 import {Doctor, Visit} from '../../classes';
-import {useFormInput} from '../Master/functions';
+import {useFormInput} from '../Other/functions';
 
 const AddNewClinic = styled.div`
     width: 100%;

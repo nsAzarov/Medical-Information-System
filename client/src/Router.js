@@ -8,7 +8,7 @@ import Doctor from './Components/Doctor';
 import LogReg from './Components/LogReg';
 import Patient from './Components/Patient';
 import Home from './Components/Home';
-import ScrollToTop from './Components/Master/ScrollToTop';
+import ScrollToTop from './Components/Other/ScrollToTop';
 
 const Router = () => {
     return (

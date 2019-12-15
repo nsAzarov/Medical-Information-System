@@ -3,10 +3,10 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {ChoiceTitle, Section} from './Main';
-import {AddNewBlock} from '../Master/AddNewBlock';
-import {Container} from '../Master/Container';
-import {Blocks, Option} from '../Master/Option';
-import Spinner from '../Master/Spinner';
+import {AddNewBlock} from '../Other/AddNewBlock';
+import {Container} from '../Other/Container';
+import {Blocks, Option} from '../Other/Option';
+import Spinner from '../Other/Spinner';
 
 const AddNewClinic = styled(Link)`
     height: 100%;

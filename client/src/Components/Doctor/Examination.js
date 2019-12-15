@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import Spinner from '../Master/Spinner';
-import {PatientInfo} from '../Master/PatientInfo';
+import Spinner from '../Other/Spinner';
+import {PatientInfo} from '../Other/PatientInfo';
 import {APIService, MedicalExamination} from '../../classes';
-import {useFormInput} from '../Master/functions';
-import {Button} from '../Master/Button';
+import {useFormInput} from '../Other/functions';
+import {Button} from '../Other/Button';
 
 const ReferralToAdditionalExamination = styled.div`
     h2 {

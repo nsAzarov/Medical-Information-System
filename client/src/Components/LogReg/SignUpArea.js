@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import {Button} from '../Master/Button';
+import {Button} from '../Other/Button';
 import {Patient} from '../../classes';
-import {useFormInput} from '../Master/functions';
+import {useFormInput} from '../Other/functions';
 
 const Input = styled.div`
     h4 {

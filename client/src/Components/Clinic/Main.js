@@ -4,12 +4,12 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import RoomsSection from './RoomsSection';
-import {Container} from '../Master/Container';
-import {InfoSection} from '../Master/InfoSection';
+import {Container} from '../Other/Container';
+import {InfoSection} from '../Other/InfoSection';
 import {Clinic} from '../../classes';
-import {ModalBackground, DeleteModal} from '../Master/Modal.js';
-import {Button} from '../Master/Button';
-import {useFormInput} from '../Master/functions';
+import {ModalBackground, DeleteModal} from '../Other/Modal.js';
+import {Button} from '../Other/Button';
+import {useFormInput} from '../Other/functions';
 
 const Logo = styled.img`
     height: 120px;

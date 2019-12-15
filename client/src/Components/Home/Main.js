@@ -8,9 +8,9 @@ import SpecializationSection from './SpecializationSection';
 import TimetableSection from './TimetableSection';
 import AppointmentSection from './AppointmentSection';
 
-import {Container} from '../Master/Container';
-import {ModalBackground, DeleteModal} from '../Master/Modal';
-import {useFormInput} from '../Master/functions';
+import {Container} from '../Other/Container';
+import {ModalBackground, DeleteModal} from '../Other/Modal';
+import {useFormInput} from '../Other/functions';
 import {APIService, Appointment} from '../../classes';
 
 export const ChoiceTitle = styled.h3`

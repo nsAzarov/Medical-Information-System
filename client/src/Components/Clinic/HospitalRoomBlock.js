@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {useFormInput} from '../Master/functions';
+import {useFormInput} from '../Other/functions';
 import {Clinic} from '../../classes';
 
 const Form = styled.form`

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {ChoiceTitle, Section} from './Main';
-import {Container} from '../Master/Container';
-import {Blocks, Option} from '../Master/Option';
+import {Container} from '../Other/Container';
+import {Blocks, Option} from '../Other/Option';
 
 export default function SpecializationSection(props) {
     return (

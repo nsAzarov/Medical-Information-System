@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
-import Spinner from '../Master/Spinner';
+import Spinner from '../Other/Spinner';
 import {APIService} from '../../classes';
-import {PatientInfo} from '../Master/PatientInfo';
-import {Container} from '../Master/Container';
+import {PatientInfo} from '../Other/PatientInfo';
+import {Container} from '../Other/Container';
 
 const SelectedExamResults = styled.div`
     padding: 5px;

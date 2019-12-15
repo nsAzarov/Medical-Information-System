@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 import {ChoiceTitle, Section} from './Main';
-import {Container} from '../Master/Container';
+import {Container} from '../Other/Container';
 
 const AppointmentForm = styled.form`
     display: flex;

@@ -2,13 +2,13 @@ import React, {Fragment, useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import {Container} from '../Master/Container';
-import {InfoSection} from '../Master/InfoSection';
+import {Container} from '../Other/Container';
+import {InfoSection} from '../Other/InfoSection';
 import {APIService, Doctor, Visit} from '../../classes';
 import Examination from './Examination';
-import {Button} from '../Master/Button';
-import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
-import Spinner from '../Master/Spinner';
+import {Button} from '../Other/Button';
+import {Schedule, DayBlock, ScheduleBlock} from '../Other/Schedule';
+import Spinner from '../Other/Spinner';
 
 const ExaminationSection = styled.section`
     width: 100%;

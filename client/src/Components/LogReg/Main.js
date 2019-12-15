@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {Container} from '../Master/Container';
+import {Container} from '../Other/Container';
 import SignInArea from './SignInArea';
 import SignUpArea from './SignUpArea';
 

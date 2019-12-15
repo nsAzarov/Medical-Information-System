@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
 
-import Header from '../Master/Header';
-import LinkToLogReg from '../Master/LinkToLogReg';
+import Header from '../Other/Header';
+import LinkToLogReg from '../Other/LinkToLogReg';
 import Main  from './Main';
-import Footer from '../Master/Footer';
+import Footer from '../Other/Footer';
 
 export default function Home() {
     return (

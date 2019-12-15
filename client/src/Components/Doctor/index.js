@@ -1,8 +1,8 @@
 import React, {Fragment} from 'react';
 
-import Header from '../Master/Header';
+import Header from '../Other/Header';
 import Main  from './Main';
-import Footer from '../Master/Footer';
+import Footer from '../Other/Footer';
 
 export default function Doctor(props) {
     return (

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {ChoiceTitle, Section} from './Main';
-import {Container} from '../Master/Container';
-import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
+import {Container} from '../Other/Container';
+import {Schedule, DayBlock, ScheduleBlock} from '../Other/Schedule';
 
 export default function TimetableSection(props) {
     const Scroll = () => {

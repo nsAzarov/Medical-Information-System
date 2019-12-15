@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {ChoiceTitle, Section} from './Main';
-import {Blocks, Option} from '../Master/Option';
-import {Container} from '../Master/Container';
+import {Blocks, Option} from '../Other/Option';
+import {Container} from '../Other/Container';
 
 export default function DoctorsSection(props) {
     const Scroll = () => {

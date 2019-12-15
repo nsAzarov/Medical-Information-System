@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Redirect} from 'react-router';
 import styled from 'styled-components';
 
-import {Button} from '../Master/Button';
-import {useFormInput} from '../Master/functions';
+import {Button} from '../Other/Button';
+import {useFormInput} from '../Other/functions';
 
 const Input = styled.div`
     h4 {

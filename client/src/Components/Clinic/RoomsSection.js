@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import uniqid from 'uniqid';
 
 import HospitalRoomBlock from './HospitalRoomBlock';
-import {AddNewBlock} from '../Master/AddNewBlock';
+import {AddNewBlock} from '../Other/AddNewBlock';
 import {Clinic, HospitalRoom} from '../../classes';
-import { Container } from '../Master/Container';
+import { Container } from '../Other/Container';
 
 const HospitalRooms = styled.div`
     width: 100%;
