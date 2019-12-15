@@ -3,9 +3,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import Spinner from '../Master/Spinner';
-import {APIService} from '../Master/ApiService';
 import {PatientInfo} from '../Master/PatientInfo';
-import {MedicalExamination} from '../../classes';
+import {APIService, MedicalExamination} from '../../classes';
 import {useFormInput} from '../Master/functions';
 import {Button} from '../Master/Button';
 

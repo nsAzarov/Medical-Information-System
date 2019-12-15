@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 import Spinner from '../Master/Spinner';
-import {APIService} from '../Master/ApiService';
+import {APIService} from '../../classes';
 import {PatientInfo} from '../Master/PatientInfo';
 import {Container} from '../Master/Container';
 
@@ -107,6 +107,7 @@ export default function Main(props) {
                     <SelectedExamResults>
                         <h4>Дата</h4>{selectedExamResults.date}
                         <h4>Симптомы</h4>{selectedExamResults.symptoms}
+                        <h4>Результаты осмотра</h4>{selectedExamResults.inspectionResults}
                         <h4>Диагноз</h4>{selectedExamResults.diagnosis}
                         <h4>Лекарства</h4>{selectedExamResults.medicines}
                         <h4>Рекомендации</h4>{selectedExamResults.recommendations}

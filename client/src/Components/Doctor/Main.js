@@ -2,10 +2,9 @@ import React, {Fragment, useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import {APIService} from '../Master/ApiService';
 import {Container} from '../Master/Container';
 import {InfoSection} from '../Master/InfoSection';
-import {Doctor, Visit} from '../../classes';
+import {APIService, Doctor, Visit} from '../../classes';
 import Examination from './Examination';
 import {Button} from '../Master/Button';
 import {Schedule, DayBlock, ScheduleBlock} from '../Master/Schedule';
