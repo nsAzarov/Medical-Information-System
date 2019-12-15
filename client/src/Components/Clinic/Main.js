@@ -177,6 +177,8 @@ export default function Main(props) {
 
         setEditorOpened(false);
         setClinicObj(tempObj);
+
+        //axios
     }
 
     const AddToDoctorsList = (idDoctor) => {
@@ -191,8 +193,7 @@ export default function Main(props) {
             tempObj._id = clinicObj._id;
             tempObj.doctorsList = clinicObj.doctorsList;
             tempObj.hospitalRoomsList = clinicObj.hospitalRoomsList;
-            tempObj.doctorsList.push(idDoctor);
-            //tempObj.addNewDoctorToList(doctorObj);
+            tempObj.addNewDoctorToList(idDoctor);
             setClinicObj(tempObj);
 
             axios
@@ -207,14 +208,7 @@ export default function Main(props) {
         tempObj._id = clinicObj._id;
         tempObj.doctorsList = clinicObj.doctorsList;
         tempObj.hospitalRoomsList = clinicObj.hospitalRoomsList;
-
-        let tempDoctorsList = [];
-        for(let i = 0; i < tempObj.doctorsList.length; i++) {
-            if (tempObj.doctorsList[i] !== idDoctor) {
-                tempDoctorsList.push(tempObj.doctorsList[i]);
-            }
-        }
-        tempObj.doctorsList = tempDoctorsList;
+        tempObj.removeFromDoctorsList(tempObj, idDoctor);
         
         setClinicObj(tempObj);
         
@@ -334,9 +328,6 @@ export default function Main(props) {
             <hr />
             <RoomsSection clinicState={[clinicObj, setClinicObj]} clinicObj={clinicObj}/>
             <hr />
-            <Container>
-                <Button onClick={() => SaveChanges()}>Сохранить изменения</Button>
-            </Container>
         </Fragment>
     )
 }

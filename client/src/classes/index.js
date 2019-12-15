@@ -6,8 +6,20 @@ class Clinic {
     }
     doctorsList = [];
     hospitalRoomsList = [];
-    addNewDoctorToList = (doctorObj) => {
-        this.doctorsList.push(doctorObj);
+    addNewDoctorToList = (idDoctor) => {
+        this.doctorsList.push(idDoctor);
+    }
+    removeFromDoctorsList = (tempObj, idDoctor) => {
+        let tempDoctorsList = [];
+        for(let i = 0; i < tempObj.doctorsList.length; i++) {
+            if (tempObj.doctorsList[i] !== idDoctor) {
+                tempDoctorsList.push(tempObj.doctorsList[i]);
+            }
+        }
+        this.doctorsList = tempDoctorsList;
+    }
+    addNewHospitalRoom = (newHospitalRoomObject) => {
+        this.hospitalRoomsList.push(newHospitalRoomObject)
     }
 }
 class HospitalRoom {
@@ -16,7 +28,7 @@ class HospitalRoom {
         this.roomNumber = roomNumber;
         this.capacity = capacity; //вместимость
         this.occupancy = occupancy; //заполненность
-        this.patientList = patientList; //[] id
+        this.patientList = patientList; 
     }
 }
 
@@ -30,7 +42,6 @@ class Visit {
     idPatient = '';
     data = '';
     active = false;
-    timePeriodNumber = 0;
     setActive = () => {this.active = true};
     setNotActive = () => {this.active = false};
 }
@@ -45,7 +56,6 @@ class Doctor {
         this.experience = experience;
         this.schedule = schedule; 
     }
-    clinicsID = [];
 }
 
 class Patient {

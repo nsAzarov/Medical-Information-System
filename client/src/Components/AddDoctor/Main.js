@@ -83,10 +83,6 @@ export default function Main() {
         const id = uniqid();
         const newObj = new Doctor(id, ImgUrl.value, Name.value, Age.value, Specialization.value, Experience.value, schedule);
         setNewObj(newObj);
-
-        let doctors = JSON.parse(localStorage.getItem('doctors'));
-        doctors.push(newObj);
-        localStorage.setItem('doctors', JSON.stringify(doctors));
         
         axios
             .post("/AddDoctor", {idDoctor: newObj.idDoctor, imgUrl: ImgUrl.value, name: Name.value, specialization: Specialization.value, age: Age.value, experience: Experience.value, schedule})

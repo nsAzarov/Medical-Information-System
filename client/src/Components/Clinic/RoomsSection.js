@@ -37,7 +37,7 @@ export default function RoomsSectionComponent(props) {
         tempObj.hospitalRoomsList = clinicObj.hospitalRoomsList;
 
         const newHospitalRoomObject = new HospitalRoom(uniqid(), '', 0, 0, []);
-        tempObj.hospitalRoomsList.push(newHospitalRoomObject);
+        tempObj.addNewHospitalRoom(newHospitalRoomObject);
 
         setClinicObj(tempObj);
 

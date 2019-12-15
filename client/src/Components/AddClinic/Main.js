@@ -43,15 +43,6 @@ const ClinicName = styled.form`
     }
 `;
 
-// Добавление логотипа
-// добавление называния
-// 
-// заполнение врачами. два варианта. или выбрать из списка существующих, либо перенаправить на страницу создания нового врача.
-// заполнение информации о палатах. Указать количество палат. На основании числа, появляется соответствующее количество палат
-// в виде прямоугольников. Нажимая на каждый из них, выпадает модальное окно (или лучше увеличивается этот прямоугольник до размера почти всего экрана)
-// В нём заполняем инфу: номер палаты, вместимость. Также здесь можно будет посмотреть список пациентов лежащих в этой палате и удалить 
-// отдельных пациентов при желании. 
-//
 export default function Main() {
     const [objectCreatedSuccessfully, setObjectCreatedSuccessfully] = useState(false);
     const [newObj, setNewObj] = useState({});
@@ -63,10 +54,6 @@ export default function Main() {
         const id = uniqid();
         const newObj = new Clinic(id, ImgUrl.value, Name.value);
         setNewObj(newObj);
-
-        let clinics = JSON.parse(localStorage.getItem('clinics'));
-        clinics.push(newObj);
-        localStorage.setItem('clinics', JSON.stringify(clinics));
 
         axios
             .post("/AddClinic", {imgUrl: ImgUrl.value, name: Name.value, doctorsList: newObj.doctorsList, hospitalRoomsList: newObj.hospitalRoomsList})
