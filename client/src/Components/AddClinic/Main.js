@@ -17,7 +17,6 @@ const AddNewClinic = styled.div`
 
 const Logo = styled.img`
     height: 120px;
-    width: 120px;
     margin: 20px;
 `;
 
@@ -56,7 +55,7 @@ export default function Main() {
         setNewObj(newObj);
 
         axios
-            .post("/AddClinic", {imgUrl: ImgUrl.value, name: Name.value, doctorsList: newObj.doctorsList, hospitalRoomsList: newObj.hospitalRoomsList})
+            .post("/AddClinic", {...newObj})
             .then(response => {console.log(response)})
             .catch(error => {console.log(error)})
 

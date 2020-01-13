@@ -8,12 +8,10 @@ import {Container} from '../Other/Container';
 import {InfoSection} from '../Other/InfoSection';
 import {Clinic} from '../../classes';
 import {ModalBackground, DeleteModal} from '../Other/Modal.js';
-import {Button} from '../Other/Button';
 import {useFormInput} from '../Other/functions';
 
 const Logo = styled.img`
     height: 120px;
-    width: 120px;
     margin: 20px;
 `;
 
@@ -137,23 +135,11 @@ const DoctorLine = styled.li`
 
 export default function Main(props) {
     const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
-    //const [doctorsInDB, setDoctorsInDB] = useState(JSON.parse(localStorage.getItem('doctors')));
     const [editorOpened, setEditorOpened] = useState(false);
     const [removableDoctor, setRemovableDoctor] = useState({});
     const [deleteModalOpened, setDeleteModalOpened] = useState(false);
     const imgUrl = useFormInput(clinicObj.imgUrl);
     const clinicName = useFormInput(clinicObj.name);
-    
-    /*const deleteDoctorFromDB = () => {
-        let tempArr = [];
-        for (let i = 0; i < doctorsInDB.length; i++) {
-            if (doctorsInDB[i].idDoctor !== removableDoctor.idDoctor) {
-                tempArr.push(doctorsInDB[i])
-            }
-        }
-        setDoctorsInDB(tempArr);
-        localStorage.setItem('doctors', JSON.stringify(tempArr));
-    }*/
 
     const updateLogoImage = (e) => {
         e.preventDefault();
@@ -216,22 +202,6 @@ export default function Main(props) {
             .post("/RemoveFromDoctorsList", {_id: clinicObj._id, idDoctor})
             .then(response => {console.log(response)})
             .catch(error => {console.log(error)})
-    }
-
-    const SaveChanges = () => {
-        let clinics = JSON.parse(localStorage.getItem('clinics'));
-        let tempArr = [];
-        
-        for (let i = 0; i < clinics.length; i++) {
-            if (clinics[i].idClinic !== clinicObj.idClinic) {
-                tempArr.push(clinics[i]);
-            } else {
-                tempArr.push(clinicObj);
-            }
-        }
-        
-        clinics = tempArr;
-        localStorage.setItem('clinics', JSON.stringify(tempArr));
     }
 
     return (

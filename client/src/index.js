@@ -1,19 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from './Router';
-import uniqid from 'uniqid';
-
-import {Doctor} from './classes';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers/rootReducer';
 
 import './main.css'; 
 
-if (!localStorage.getItem('clinics')) {
-    localStorage.setItem('clinics', JSON.stringify([]));
-}
+const store = createStore(rootReducer);
+store.subscribe(() => console.log('store ', store.getState()))
 
-if(!localStorage.getItem('doctors')) {
-    const emptyDoctor = new Doctor(uniqid(), "img", "name", "age", "spec", "exp", "schedule");
-    localStorage.setItem('doctors', JSON.stringify([emptyDoctor]));
-}
-
-ReactDOM.render(<Router />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}><Router /></Provider>,
+    document.getElementById('root')
+);

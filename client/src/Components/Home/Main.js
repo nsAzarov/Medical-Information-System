@@ -1,6 +1,8 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import axios from 'axios';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../actions';
 
 import ClinicsSection from './ClinicsSection';
 import DoctorsSection from './DoctorsSection';
@@ -84,7 +86,7 @@ const ConfirmModal = styled.div`
     }
 `;
 
-export default function Main() {
+const Main = (props) => {
     const [clinics, setClinics] = useState([]);
     const [doctorsInDB, setDoctorsInDB] = useState([]);
     const [clinicsLoading, setClinicsLoading] = useState(true);
@@ -227,3 +229,11 @@ export default function Main() {
         </Fragment>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        cartProducts: state.cartProducts
+    }
+}
+
+export default connect(mapStateToProps, actionCreators)(Main);
