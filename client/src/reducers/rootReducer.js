@@ -1,23 +1,36 @@
 const initState = {
-    cartProducts: []
+    selectedClinic: '',
+    specializations: '',
+    selectedDoctor: '',
+    selectedVisitTime: ''
 }
 
 const rootReducer = (state = initState, action) => {
     switch (action.type) {
-        case "ADD_TO_CART":
+        case "SELECT_CLINIC":
             return{
                 ...state,
-                cartProducts: state.cartProducts.concat(action.product)
+                selectedClinic: action.clinic
+            }  
+        case "SET_SPECIALIZATIONS":
+            return{
+                ...state,
+                specializations: action.specializationsArr
+            }  
+        case "SELECT_SPECIALIZATION":
+            return{
+                ...state,
+                selectedSpecialization: action.specialization
             }
-        case "INCREASE_QUANTITY":
-            const newArr = state.cartProducts;
-            newArr.forEach(p => {
-                if(p._id === action.productId) {
-                    p.quantity++
-                }})
+        case "SELECT_DOCTOR":
             return{
                 ...state,
-                cartProducts: newArr
+                selectedDoctor: action.doctor
+            }
+        case "SELECT_VISIT_TIME":
+            return{
+                ...state,
+                selectedVisitTime: action.visitTime
             }
         default:    
             return {

@@ -112,11 +112,6 @@ const Main = (props) => {
             });
     }, []);
 
-    const [selectedClinic, setSelectedClinic] = useState('');
-    const [specializations, setSpecializations] = useState([]);
-    const [selectedSpecialization, setSelectedSpecialization] = useState('');
-    const [selectedDoctor, setSelectedDoctor] = useState('');
-    const [selectedVisitTime, setSelectedVisitTime] = useState('');
     const SNILS = useFormInput('');
     const LnameFname = useFormInput('');
 
@@ -143,7 +138,7 @@ const Main = (props) => {
     }
     
     const makeAppointmentWithDoctor = () => {
-        let appointment = new Appointment(selectedClinic._id, selectedDoctor._id, selectedVisitTime.dayName, selectedVisitTime.timePeriod, SNILS.value, LnameFname.value);
+        let appointment = new Appointment(props.selectedClinic._id, props.selectedDoctor._id, props.selectedVisitTime.dayName, props.selectedVisitTime.timePeriod, SNILS.value, LnameFname.value);
         
         axios
             .post("/MakeAppointment", {...appointment})
@@ -175,16 +170,16 @@ const Main = (props) => {
                 <svg onClick={() => setConfirmModalOpened(false)} height="511.992pt" viewBox="0 0 511.992 511.992" width="511.992pt" xmlns="http://www.w3.org/2000/svg"><path d="m415.402344 495.421875-159.40625-159.410156-159.40625 159.410156c-22.097656 22.09375-57.921875 22.09375-80.019532 0-22.09375-22.097656-22.09375-57.921875 0-80.019531l159.410157-159.40625-159.410157-159.40625c-22.09375-22.097656-22.09375-57.921875 0-80.019532 22.097657-22.09375 57.921876-22.09375 80.019532 0l159.40625 159.410157 159.40625-159.410157c22.097656-22.09375 57.921875-22.09375 80.019531 0 22.09375 22.097657 22.09375 57.921876 0 80.019532l-159.410156 159.40625 159.410156 159.40625c22.09375 22.097656 22.09375 57.921875 0 80.019531-22.097656 22.09375-57.921875 22.09375-80.019531 0zm0 0" fill="#e76e54"/></svg>
                 <div>
                     <div id="top-area">
-                        <img src={selectedClinic.imgUrl} alt=""/>
-                        <img src={selectedDoctor.imgUrl} alt=""/>
+                        <img src={props.selectedClinic.imgUrl} alt=""/>
+                        <img src={props.selectedDoctor.imgUrl} alt=""/>
                         <div id="doctor-info">
-                            {selectedDoctor.name}<br />
-                            {selectedDoctor.specialization}<br />
-                            Стаж: {selectedDoctor.experience}<br />
+                            {props.selectedDoctor.name}<br />
+                            {props.selectedDoctor.specialization}<br />
+                            Стаж: {props.selectedDoctor.experience}<br />
                         </div>
                     </div>
                     <div id="appointment-time">
-                        {selectedVisitTime.dayName} {selectedVisitTime.timePeriod}
+                        {props.selectedVisitTime.dayName} {props.selectedVisitTime.timePeriod}
                     </div>
                     <div id="patient-info">
                         СНИЛС: {SNILS.value}<br />
@@ -199,18 +194,18 @@ const Main = (props) => {
             </ConfirmModal>
             </>
             :null}
-            <ClinicsSection clinics={clinics} clinicsLoading={clinicsLoading} doctorsInDB={doctorsInDB} doctorsLoading={doctorsLoading} setSelectedClinic={setSelectedClinic} setSpecializations={setSpecializations} setRemovableClinic={setRemovableClinic} setDeleteModalOpened={setDeleteModalOpened} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
-            {selectedClinic ?
+            <ClinicsSection clinics={clinics} clinicsLoading={clinicsLoading} doctorsInDB={doctorsInDB} doctorsLoading={doctorsLoading}/>
+            {props.selectedClinic ?
                 <>
-                <SpecializationSection specializations={specializations} setSelectedSpecialization={setSelectedSpecialization} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
-                {selectedSpecialization ?
+                <SpecializationSection />
+                {props.selectedSpecialization ?
                     <>
-                    <DoctorsSection selectedSpecialization={selectedSpecialization} doctorsIDList={selectedClinic.doctorsList} doctorsInDB={doctorsInDB} setSelectedDoctor={setSelectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
-                    {selectedDoctor ?
+                    <DoctorsSection doctorsInDB={doctorsInDB}/>
+                    {props.selectedDoctor ?
                         <>
-                        <TimetableSection doctorObj={selectedDoctor} setSelectedVisitTime={setSelectedVisitTime}/>
-                        {selectedVisitTime ? 
-                            <AppointmentSection selectedVisitTime={selectedVisitTime} setConfirmModalOpened={setConfirmModalOpened} SNILS={SNILS} LnameFname={LnameFname}/>
+                        <TimetableSection />
+                        {props.selectedVisitTime ? 
+                            <AppointmentSection setConfirmModalOpened={setConfirmModalOpened} SNILS={SNILS} LnameFname={LnameFname}/>
                             :
                             null
                         }
@@ -232,7 +227,10 @@ const Main = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        cartProducts: state.cartProducts
+        selectedClinic: state.selectedClinic,
+        selectedSpecialization: state.selectedSpecialization,
+        selectedDoctor: state.selectedDoctor,
+        selectedVisitTime: state.selectedVisitTime
     }
 }
 

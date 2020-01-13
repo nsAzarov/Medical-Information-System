@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../actions';
 
 import {ChoiceTitle, Section} from './Main';
 import {AddNewBlock} from '../Other/AddNewBlock';
@@ -16,7 +18,7 @@ const AddNewClinic = styled(Link)`
     border-radius: 8px;
 `;
 
-export default function ClinicsSection(props) {
+const ClinicsSection = (props) => {
     const setSpecializationsArr = (clinic) => {
         let arr = [];
         
@@ -49,7 +51,7 @@ export default function ClinicsSection(props) {
                     <Blocks>
                     {props.clinics.map((element, i) => {
                     return <Option key={i} >
-                        <div id='clickable-area' onClick={() => {setSpecializationsArr(props.clinics[i]); props.setSelectedClinic(props.clinics[i]); props.setSelectedSpecialization(''); props.setSelectedDoctor(''); props.setSelectedVisitTime('');}}></div>
+                        <div id='clickable-area' onClick={() => {setSpecializationsArr(props.clinics[i]); props.selectClinic(props.clinics[i])}}></div>
                         <img src={element.imgUrl} alt="" />
                         <Link to={{
                             pathname: `/Clinic/${element._id}`,
@@ -76,3 +78,5 @@ export default function ClinicsSection(props) {
         </Section>
     )
 }
+
+export default connect(null, actionCreators)(ClinicsSection);

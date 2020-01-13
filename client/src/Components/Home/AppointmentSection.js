@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../actions';
 
 import {ChoiceTitle, Section} from './Main';
 import {Container} from '../Other/Container';
@@ -42,7 +44,7 @@ const SelectedVisitTime = styled.div`
     margin-bottom: 20px;
 `;
 
-export default function AppointmentSection(props) {
+const AppointmentSection = (props) => {
     const [dayName, setDayName] = useState('');
     useEffect(() => {
         switch(props.selectedVisitTime.dayName) {
@@ -92,3 +94,14 @@ export default function AppointmentSection(props) {
         </Section>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        selectedClinic: state.selectedClinic,
+        selectedSpecialization: state.selectedSpecialization,
+        selectedDoctor: state.selectedDoctor,
+        selectedVisitTime: state.selectedVisitTime
+    }
+}
+
+export default connect(mapStateToProps, actionCreators)(AppointmentSection);
