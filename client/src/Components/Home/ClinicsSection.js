@@ -32,16 +32,6 @@ const ClinicsSection = (props) => {
         props.setSpecializations(arr);
     }
 
-    /*const deleteClinicFromDB = () => {
-        let tempArr = [];
-        for (let i = 0; i < props.clinics.length; i++) {
-            //if (props.clinics[i].idClinic !== removableDoctor.idDoctor) {
-            //    tempArr.push(props.clinics[i])
-            //}
-        }
-        props.setClinics(tempArr);
-        localStorage.setItem('clinics', JSON.stringify(tempArr));
-    }*/
     return (
         <Section>
             <Container>
@@ -81,7 +71,8 @@ const ClinicsSection = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        clinics: state.clinics
+        clinics: state.clinics,
+        doctorsInDB: state.doctorsInDB
     }
 }
 

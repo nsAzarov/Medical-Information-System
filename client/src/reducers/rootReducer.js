@@ -26,7 +26,10 @@ const rootReducer = (state = initState, action) => {
         case "SELECT_CLINIC":
             return{
                 ...state,
-                selectedClinic: action.clinic
+                selectedClinic: action.clinic,
+                selectedSpecialization: '',
+                selectedDoctor: '',
+                selectedVisitTime: ''
             }  
         case "SET_SPECIALIZATIONS":
             return{
@@ -36,12 +39,15 @@ const rootReducer = (state = initState, action) => {
         case "SELECT_SPECIALIZATION":
             return{
                 ...state,
-                selectedSpecialization: action.specialization
+                selectedSpecialization: action.specialization,
+                selectedDoctor: '',
+                selectedVisitTime: ''
             }
         case "SELECT_DOCTOR":
             return{
                 ...state,
-                selectedDoctor: action.doctor
+                selectedDoctor: action.doctor,
+                selectedVisitTime: ''
             }
         case "SELECT_VISIT_TIME":
             return{

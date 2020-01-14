@@ -1,5 +1,4 @@
 import React, {Fragment, useState, useEffect} from 'react'
-import axios from 'axios';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions';
@@ -15,7 +14,7 @@ import AppointmentSection from './AppointmentSection';
 import {Container} from '../Other/Container';
 import {ModalBackground} from '../Other/Modal';
 import {useFormInput} from '../Other/functions';
-import {APIService, Appointment} from '../../classes';
+import {APIService} from '../../classes';
 
 export const ChoiceTitle = styled.h3`
     margin: 20px;
@@ -32,8 +31,6 @@ export const Section = styled.section`
 `;
 
 const Main = (props) => {
-    const [clinics, setClinics] = useState([]);
-    const [doctorsInDB, setDoctorsInDB] = useState([]);
     const [clinicsLoading, setClinicsLoading] = useState(true);
     const [doctorsLoading, setDoctorsLoading] = useState(true);
 
@@ -43,22 +40,18 @@ const Main = (props) => {
             .getAllClinics()
             .then(clinics => {
                 props.setClinics(clinics);
-                setClinics(clinics);
                 setClinicsLoading(false);
             });
         ApiService
             .getAllDoctors()
             .then(doctors => {
                 props.setDoctors(doctors);
-                setDoctorsInDB(doctors);
                 setDoctorsLoading(false);
             });
     }, []);
 
     const SNILS = useFormInput('');
     const LnameFname = useFormInput('');
-
-    const [removableClinic, setRemovableClinic] = useState({});
 
     const [windowHeight, setWindowHeight] = useState(document.body.offsetHeight);
 
@@ -81,7 +74,7 @@ const Main = (props) => {
             <ConfirmModal SNILS={SNILS} LnameFname={LnameFname}/>
             </>
             :null}
-            <ClinicsSection clinicsLoading={clinicsLoading} doctorsInDB={doctorsInDB} doctorsLoading={doctorsLoading}/>
+            <ClinicsSection clinicsLoading={clinicsLoading} doctorsLoading={doctorsLoading}/>
             {props.selectedClinic ?
                 <>
                 <SpecializationSection />
