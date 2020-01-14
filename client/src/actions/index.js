@@ -1,5 +1,9 @@
-export function addToCart(product) {
-    return {type: "ADD_TO_CART", product}
+export function setClinics(clinics) {
+    return {type: "SET_CLINICS", clinics}
+}
+
+export function setDoctors(doctorsInDB) {
+    return {type: "SET_DOCTORS", doctorsInDB}
 }
 
 export function selectClinic(clinic) {
@@ -22,6 +26,18 @@ export function selectVisitTime(visitTime) {
     return {type: "SELECT_VISIT_TIME", visitTime}
 }
 
-export function increaseQuantity(productId) {
-    return {type: "INCREASE_QUANTITY", productId}
+export function setConfirmModalOpened(confirmModalOpened) {
+    return {type: "SET_CONFIRM_MODAL_OPENED", confirmModalOpened}
+}
+
+export function setDeleteModalOpened(deleteModalOpened) {
+    return {type: "SET_DELETE_MODAL_OPENED", deleteModalOpened}
+}
+
+export function setRemovableClinic(removableClinic) {
+    return {type: "SET_REMOVABLE_CLINIC", removableClinic}
+}
+
+export function setRemovableDoctor(removableDoctor) {
+    return {type: "SET_REMOVABLE_DOCTOR", removableDoctor}
 }

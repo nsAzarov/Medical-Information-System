@@ -100,7 +100,8 @@ const mapStateToProps = (state) => {
         selectedClinic: state.selectedClinic,
         selectedSpecialization: state.selectedSpecialization,
         selectedDoctor: state.selectedDoctor,
-        selectedVisitTime: state.selectedVisitTime
+        selectedVisitTime: state.selectedVisitTime,
+        confirmModalOpened: state.confirmModalOpened
     }
 }
 

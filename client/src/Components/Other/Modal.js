@@ -10,7 +10,7 @@ export const ModalBackground = styled.div`
     opacity: 0.8;
 `;
 
-export const DeleteModal = styled.div`
+export const Delete = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;

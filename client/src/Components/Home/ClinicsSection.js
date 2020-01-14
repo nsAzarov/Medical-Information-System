@@ -79,4 +79,10 @@ const ClinicsSection = (props) => {
     )
 }
 
-export default connect(null, actionCreators)(ClinicsSection);
+const mapStateToProps = (state) => {
+    return {
+        clinics: state.clinics
+    }
+}
+
+export default connect(mapStateToProps, actionCreators)(ClinicsSection);

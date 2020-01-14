@@ -34,10 +34,9 @@ const DoctorsSection = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        doctorsInDB: state.doctorsInDB,
         selectedClinic: state.selectedClinic,
-        selectedSpecialization: state.selectedSpecialization,
-        selectedDoctor: state.selectedDoctor,
-        selectedVisitTime: state.selectedVisitTime
+        selectedSpecialization: state.selectedSpecialization
     }
 }
 
