@@ -101,6 +101,17 @@ app.post('/AddDoctor', (req, res) => {
     })
 })
 
+app.post('/DeleteDoctor', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+
+    Doctor.deleteOne({_id: req.body._id}, (err, res) => {
+        if(err) {
+            if (err) return console.error(err);
+            console.log(res);
+        }
+    });
+})
+
 app.post('/SaveSchedule', (req, res) => {
     if(!req.body) return res.sendStatus(400);
     
