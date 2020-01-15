@@ -77,6 +77,17 @@ app.post('/AddNewHospitalRoom', (req, res) => {
     });
 })
 
+app.post('/DeleteClinic', (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+
+    Clinic.deleteOne({_id: req.body._id}, (err, res) => {
+        if(err) {
+            if (err) return console.error(err);
+            console.log(res);
+        }
+    });
+})
+
 const Doctor = require('./models/Doctor');
 
 app.post('/AddDoctor', (req, res) => {

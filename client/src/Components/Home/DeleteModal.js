@@ -1,21 +1,16 @@
 import React from 'react';
+import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions';
 
 import {Delete} from '../Other/Modal';
 
 const DeleteModal = (props) => {
-    //ПЕРЕДЕЛАТЬ
-    const deleteClinicFromDB = () => {
-        alert("ПЕРЕДЕЛАТЬ")
-        /*let tempArr = [];
-        for (let i = 0; i < clinics.length; i++) {
-            if (clinics[i].idClinic !== removableClinic.idClinic) {
-                tempArr.push(clinics[i])
-            }
-        }
-        setClinics(tempArr);
-        localStorage.setItem('clinics', JSON.stringify(tempArr));*/
+    const deleteClinicFromDB = (_id) => {
+        axios
+            .post("/DeleteClinic", {_id})
+            .then(response => {console.log(response)})
+            .catch(error => {console.log(error)})
     }
 
     return (
@@ -24,7 +19,7 @@ const DeleteModal = (props) => {
             <h4>Вы действительно хотите удалить эту клинику из Базы Данных?</h4>
             <img src={props.removableClinic.imgUrl} alt='logo-img' />
             <div id='btn-area'>
-                <button onClick={() => {deleteClinicFromDB(); props.setDeleteModalOpened(false)}}>Да</button>
+                <button onClick={() => {deleteClinicFromDB(props.removableClinic._id); props.setDeleteModalOpened(false)}}>Да</button>
                 <button onClick={() => props.setDeleteModalOpened(false)}>Нет</button>
             </div>
         </Delete>
