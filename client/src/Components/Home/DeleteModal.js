@@ -1,10 +1,7 @@
 import React from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions';
 
-import {Appointment} from '../../classes';
 import {Delete} from '../Other/Modal';
 
 const DeleteModal = (props) => {

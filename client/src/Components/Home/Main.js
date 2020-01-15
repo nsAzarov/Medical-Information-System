@@ -31,24 +31,21 @@ export const Section = styled.section`
 `;
 
 const Main = (props) => {
-    const [clinicsLoading, setClinicsLoading] = useState(true);
-    const [doctorsLoading, setDoctorsLoading] = useState(true);
-
     useEffect(() => {
         const ApiService = new APIService();
         ApiService
             .getAllClinics()
             .then(clinics => {
                 props.setClinics(clinics);
-                setClinicsLoading(false);
+                props.setClinicsLoading(false);
             });
         ApiService
             .getAllDoctors()
             .then(doctors => {
                 props.setDoctors(doctors);
-                setDoctorsLoading(false);
+                props.setDoctorsLoading(false);
             });
-    }, []);
+    }, [props]);
 
     const SNILS = useFormInput('');
     const LnameFname = useFormInput('');
@@ -74,7 +71,7 @@ const Main = (props) => {
             <ConfirmModal SNILS={SNILS} LnameFname={LnameFname}/>
             </>
             :null}
-            <ClinicsSection clinicsLoading={clinicsLoading} doctorsLoading={doctorsLoading}/>
+            <ClinicsSection/>
             {props.selectedClinic ?
                 <>
                 <SpecializationSection />

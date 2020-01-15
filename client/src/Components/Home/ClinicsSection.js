@@ -71,6 +71,8 @@ const ClinicsSection = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        clinicsLoading: state.clinicsLoading,
+        doctorsLoading: state.doctorsLoading,
         clinics: state.clinics,
         doctorsInDB: state.doctorsInDB
     }

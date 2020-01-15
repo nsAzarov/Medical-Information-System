@@ -1,3 +1,11 @@
+export function setClinicsLoading(clinicsLoading) {
+    return {type: "SET_CLINICS_LOADING", clinicsLoading}
+}
+
+export function setDoctorsLoading(doctorsLoading) {
+    return {type: "SET_DOCTORS_LOADING", doctorsLoading}
+}
+
 export function setClinics(clinics) {
     return {type: "SET_CLINICS", clinics}
 }

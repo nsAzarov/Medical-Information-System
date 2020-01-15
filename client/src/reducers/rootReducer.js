@@ -1,4 +1,6 @@
 const initState = {
+    clinicsLoading: true,
+    doctorsLoading: true,
     clinics: [],
     doctorsInDB: [],
     selectedClinic: '',
@@ -13,6 +15,16 @@ const initState = {
 
 const rootReducer = (state = initState, action) => {
     switch (action.type) {
+        case "SET_CLINICS_LOADING":
+            return{
+                ...state,
+                clinicsLoading: action.clinicsLoading
+            }
+        case "SET_DOCTORS_LOADING":
+            return{
+                ...state,
+                doctorsLoading: action.doctorsLoading
+            } 
         case "SET_CLINICS":
             return{
                 ...state,

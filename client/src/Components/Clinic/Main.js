@@ -9,7 +9,7 @@ import RoomsSection from './RoomsSection';
 import {Container} from '../Other/Container';
 import {InfoSection} from '../Other/InfoSection';
 import {Clinic} from '../../classes';
-import {ModalBackground, Modal} from '../Other/Modal.js';
+import {ModalBackground} from '../Other/Modal.js';
 import DeleteModal from './DeleteModal';
 import {useFormInput} from '../Other/functions';
 
@@ -139,7 +139,6 @@ const DoctorLine = styled.li`
 const Main = (props) => {
     const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
     const [editorOpened, setEditorOpened] = useState(false);
-    const [removableDoctor, setRemovableDoctor] = useState({});
     const imgUrl = useFormInput(clinicObj.imgUrl);
     const clinicName = useFormInput(clinicObj.name);
 
@@ -217,7 +216,7 @@ const Main = (props) => {
             {props.deleteModalOpened ?
             <>
             <ModalBackground height={windowHeight} onClick={() => props.setDeleteModalOpened(false)}/>
-            <DeleteModal removableDoctor={removableDoctor}/>
+            <DeleteModal/>
             </>
             :
             null}
@@ -297,7 +296,8 @@ const Main = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        deleteModalOpened: state.deleteModalOpened
+        deleteModalOpened: state.deleteModalOpened,
+        removableDoctor: state.removableDoctor
     }
 }
 
