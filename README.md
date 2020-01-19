@@ -1,4 +1,4 @@
-## medical-information-system.herokuapp.com
+<https://medical-information-system.herokuapp.com/>
 
 ## Quick Start
 
