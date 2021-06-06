@@ -22,10 +22,12 @@ app.post('/AddClinic', (req, res) => {
     if(!req.body) return res.sendStatus(400);
 
     var clinic = new Clinic(req.body);
+    console.log('AddClinic', clinic)
     clinic._id = mongoose.Types.ObjectId();
     clinic.save((err, clinic) => {
         if (err) return console.error(err);
         console.log("Клиника " + clinic.name + " сохранена в коллекцию clinics.");
+        return res.sendStatus(200)
     })
 })
 

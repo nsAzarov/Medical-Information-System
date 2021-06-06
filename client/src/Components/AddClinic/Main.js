@@ -47,16 +47,17 @@ export default function Main() {
     const [newObj, setNewObj] = useState({});
     const ImgUrl = useFormInput('');
     const Name = useFormInput('');
-    const createNewClinicObject = (e) => {
+    const createNewClinicObject = async (e) => {
         e.preventDefault();
 
         const id = uniqid();
         const newObj = new Clinic(id, ImgUrl.value, Name.value);
+        newObj.name = newObj.clinicName;
         setNewObj(newObj);
 
-        axios
+        await axios
             .post("/AddClinic", {...newObj})
-            .then(response => {console.log(response)})
+            .then(response => {console.log(response); setObjectCreatedSuccessfully(true)})
             .catch(error => {console.log(error)})
 
         setObjectCreatedSuccessfully(true);

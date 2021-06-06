@@ -137,6 +137,7 @@ const DoctorLine = styled.li`
 `;
 
 const Main = (props) => {
+    console.log(props)
     const [clinicObj, setClinicObj] = useState(JSON.parse(props.clinicObj));
     const [editorOpened, setEditorOpened] = useState(false);
     const imgUrl = useFormInput(clinicObj.imgUrl);
@@ -252,7 +253,7 @@ const Main = (props) => {
                         <ChooseDoctors>
                             <h4>Все врачи в базе данных</h4>
                             <DoctorsList>
-                                {props.doctorsInDB.map((element, i) => {
+                                {props.doctorsInDB && props.doctorsInDB.map((element, i) => {
                                 return <DoctorLine key={i}>
                                     <div className='clickable-area' onClick={() => AddToDoctorsList(element.idDoctor)}></div>
                                     {element.specialization} - {element.name}
@@ -268,7 +269,7 @@ const Main = (props) => {
                         <ChooseDoctors>
                             <h4>Работающие в клинике</h4>
                             <DoctorsList>
-                                {props.doctorsInDB.map((element, ind) => {
+                                {props.doctorsInDB && props.doctorsInDB.map((element, ind) => {
                                     for (let i = 0; i < props.doctorsInDB.length; i++) {
                                         if (clinicObj.doctorsList[i] === element.idDoctor) {
                                             return <DoctorLine key={ind}>
@@ -296,6 +297,7 @@ const Main = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        doctorsInDB: state.doctorsInDB,
         deleteModalOpened: state.deleteModalOpened,
         removableDoctor: state.removableDoctor
     }
